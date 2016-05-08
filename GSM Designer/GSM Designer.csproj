@@ -57,11 +57,12 @@
     </ApplicationDefinition>
     <Compile Include="Pages\CustomWindow.cs" />
     <Compile Include="Pages\iCustomnavigation.cs" />
-    <Compile Include="Pages\NavigationService.cs" />
+    <Compile Include="AppNavigationService\NavigationService.cs" />
     <Compile Include="Pages\PatternName.xaml.cs">
       <DependentUpon>PatternName.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\DragAdorner.cs" />
+    <Compile Include="Utils\UIHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
     <Page Include="Pages\MainWindow.xaml">

@@ -17,6 +17,7 @@ using GSM_Designer.ViewModel;
 using GSM_Designer.Utils;
 using GSM_Designer.Model;
 using GSM_Designer.Pages;
+using GSM_Designer.AppNavigationService;
 
 namespace GSM_Designer
 {
@@ -41,16 +42,11 @@ namespace GSM_Designer
         {
             var fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Multiselect = true;
-            //fileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|TIFF Files (*.tiff)|*.tiff";
             fileDialog.Filter = "Image Files |*.jpeg;*.png;*.jpg;*.gif,;*.tif";
 
-            // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = fileDialog.ShowDialog();
-
-            // Get the selected file name and display in a TextBox 
             if (result == true)
             {
-                // Open document 
                 string[] filename = fileDialog.FileNames;
                 return filename;
             }
@@ -60,9 +56,30 @@ namespace GSM_Designer
         private void SelectFile_BtnClick(object sender, RoutedEventArgs e)
         {
             var files = OpenFile();
-            InfoViewModel.Instance.LoadFiles(files);
+            if (files != null && files.Any())
+                InfoViewModel.Instance.LoadFiles(files);
         }
 
+        private void AddMoreFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            var files = OpenFile();
+            if (files != null && files.Any())
+                InfoViewModel.Instance.LoadFiles(files, false);
+        }
+
+        private void RemoveItem_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            ImageFileInfo data = ((sender as Button)?.DataContext) as ImageFileInfo;
+            if (data != null)
+            {
+                InfoViewModel.Instance.Files.Remove(data);
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomNavigationService.GetNavigationService().Navigate(PageType.PatternName, this);
+        }
 
         #region ListView ReOrder
         private void ListView_DragEnter(object sender, DragEventArgs e)
@@ -197,27 +214,6 @@ namespace GSM_Designer
         }
 
         #endregion
-
-        private void AddMoreFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            var files = OpenFile();
-            InfoViewModel.Instance.LoadFiles(files, false);
-
-        }
-
-        private void RemoveItem_ButtonClick(object sender, RoutedEventArgs e)
-        {
-            ImageFileInfo data = ((sender as Button)?.DataContext) as ImageFileInfo;
-            if (data != null)
-            {
-                InfoViewModel.Instance.Files.Remove(data);
-            }
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            CustomNavigationService.GetNavigationService().Navigate(PageType.PatternName, this);
-        }
         //public void SetImage(Image image)
         //{
 

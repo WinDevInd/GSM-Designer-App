@@ -1,17 +1,19 @@
-﻿using System;
+﻿using GSM_Designer.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GSM_Designer.Pages
+namespace GSM_Designer.AppNavigationService
 {
     public enum PageType
     {
         SelectFile,
         PatternName
     }
+
     public class CustomNavigationService
     {
         private Type GetPage(PageType type)
@@ -25,6 +27,7 @@ namespace GSM_Designer.Pages
             }
             return null;
         }
+
         private static CustomNavigationService _NavigationService;
 
         private CustomNavigationService() { }

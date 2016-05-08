@@ -1,10 +1,4 @@
-﻿using GSM_Designer.Pages;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GSM_Designer.AppNavigationService;
 using System.Windows;
 
 namespace GSM_Designer
