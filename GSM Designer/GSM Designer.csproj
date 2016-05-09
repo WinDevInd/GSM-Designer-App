@@ -62,6 +62,7 @@
       <DependentUpon>PatternName.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\DragAdorner.cs" />
+    <Compile Include="Utils\ImageHelper.cs" />
     <Compile Include="Utils\UIHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
