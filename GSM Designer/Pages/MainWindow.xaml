@@ -12,20 +12,11 @@
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanResizeWithGrip">
 
+    <base:CustomWindow.Effect>
+        <DropShadowEffect BlurRadius="2" Color="#12000000"/>
+    </base:CustomWindow.Effect>
+
     <Window.Resources>
-        <Color x:Key="DropShadowBrush">#1e000000</Color>
-        <DropShadowEffect x:Key="DropShadow" Color="{StaticResource DropShadowBrush}"/>
-        <Style TargetType="Button">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Margin" Value="16"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Background" Value="#fff9f9f9"/>
-            <Setter Property="BorderBrush" Value="#7F1F6CB9"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
         <DataTemplate x:Key="FileListStyle">
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -52,15 +43,9 @@
                 <!--<TextBlock Text="{Binding FilePath}" Grid.Column="2" FontSize="12" Foreground="#212121"/>-->
             </Grid>
         </DataTemplate>
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        </Style>
     </Window.Resources>
 
-    <Window.Effect>
-        <DropShadowEffect Color="{StaticResource DropShadowBrush}"/>
-    </Window.Effect>
+   
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#f1f1f1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

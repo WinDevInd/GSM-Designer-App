@@ -6,9 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GSM_Designer.Pages"
         mc:Ignorable="d"
-        Title="Enter Pattern Name" Height="100" Width="300" 
+        Title="Enter Pattern Name" Height="180" Width="300" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid>
-        
-    </Grid>
+    <StackPanel Margin="0,16">
+        <Label Content="Enter Pattern Name" Margin="16,0" Padding="0,4" />
+        <TextBox x:Name="TextBox" Margin="16,4" Padding="4,3,4,4" FontSize="14"
+                 TextChanged="TextBox_TextChanged"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" IsEnabled="False"/>
+    </StackPanel>
 </base:CustomWindow>

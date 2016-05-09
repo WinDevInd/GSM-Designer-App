@@ -21,7 +21,7 @@ namespace GSM_Designer.Utils
                 if (size != null && source != null)
                 {
                     var bitmapEncoder = new JpegBitmapEncoder();
-                    bitmapEncoder.Frames.Add(BitmapFrame.Create(await ProcessImage(source, size, location)));
+                    bitmapEncoder.Frames.Add(BitmapFrame.Create(await ProcessImageRepeeatXY(source, size)));
                     var finalImage = new BitmapImage();
                     using (var stream = new MemoryStream())
                     {
@@ -48,7 +48,7 @@ namespace GSM_Designer.Utils
                 if (!string.IsNullOrWhiteSpace(desitnationPath) && size != null && source != null)
                 {
                     var bitmapEncoder = new JpegBitmapEncoder();
-                    bitmapEncoder.Frames.Add(BitmapFrame.Create(await ProcessImage(source, size, location)));
+                    bitmapEncoder.Frames.Add(BitmapFrame.Create(await ProcessImageRepeeatXY(source, size)));
                     using (Stream stream = File.Create("Combine.png"))
                         bitmapEncoder.Save(stream);
                     isTaskSuccess = true;
