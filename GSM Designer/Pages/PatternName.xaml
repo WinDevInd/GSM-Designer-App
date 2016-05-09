@@ -13,6 +13,6 @@
         <TextBox x:Name="TextBox" Margin="16,4" Padding="4,3,4,4" FontSize="14"
                  TextChanged="TextBox_TextChanged"
                  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" IsEnabled="False"/>
+        <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" IsEnabled="False" Click="NextButton_Click" />
     </StackPanel>
 </base:CustomWindow>

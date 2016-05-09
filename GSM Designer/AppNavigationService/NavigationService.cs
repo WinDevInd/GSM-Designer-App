@@ -11,7 +11,8 @@ namespace GSM_Designer.AppNavigationService
     public enum PageType
     {
         SelectFile,
-        PatternName
+        PatternName,
+        ImageCropping
     }
 
     public class CustomNavigationService
@@ -24,6 +25,8 @@ namespace GSM_Designer.AppNavigationService
                     return typeof(PatternNameWindow);
                 case PageType.SelectFile:
                     return typeof(SelectFileWindow);
+                case PageType.ImageCropping:
+                    return typeof(ImageCroppingWindow);
             }
             return null;
         }

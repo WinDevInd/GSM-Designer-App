@@ -13,6 +13,9 @@ namespace GSM_Designer.ViewModel
     public class InfoViewModel : BaseViewModel
     {
         private static int MinFileCount = 5;
+       
+        #region SingleTonPattern
+
         static InfoViewModel()
         {
             _Instance = new InfoViewModel();
@@ -32,13 +35,14 @@ namespace GSM_Designer.ViewModel
 
         }
 
+        #endregion
+
         private ObservableCollection<ImageFileInfo> _Files;
         public ObservableCollection<ImageFileInfo> Files
         {
             get { return _Files; }
             set { SetFieldAndNotify(ref _Files, value); }
         }
-
 
         public bool CanGoNextScreen
         {

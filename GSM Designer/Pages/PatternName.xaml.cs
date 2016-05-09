@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GSM_Designer.AppNavigationService;
+using System.Windows.Controls;
 
 namespace GSM_Designer.Pages
 {
@@ -15,6 +16,11 @@ namespace GSM_Designer.Pages
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             NextButton.IsEnabled = (sender as TextBox)?.Text.Length > 0;
+        }
+
+        private void NextButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            CustomNavigationService.GetNavigationService().Navigate(PageType.ImageCropping, this);
         }
     }
 }
