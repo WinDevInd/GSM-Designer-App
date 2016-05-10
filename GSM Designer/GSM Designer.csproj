@@ -59,7 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CanvasSizeDialog.xaml.cs">
+      <DependentUpon>CanvasSizeDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SizeControl.xaml.cs">
+      <DependentUpon>SizeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomWindow.cs" />
+    <Compile Include="Pages\iImageWidgetController.cs" />
     <Compile Include="Pages\iCustomnavigation.cs" />
     <Compile Include="AppNavigationService\NavigationService.cs" />
     <Compile Include="Pages\ImageCropping.xaml.cs">
@@ -72,7 +79,16 @@
     <Compile Include="Utils\ImageHelper.cs" />
     <Compile Include="Utils\UIHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\FIleCroppingVM.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
+    <Page Include="CanvasSizeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SizeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ImageCropping.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\TPL.csproj">
+      <Project>{78C02642-4E0F-4321-81CD-4CCAFD6168DE}</Project>
+      <Name>TPL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

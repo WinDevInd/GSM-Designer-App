@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="GSM_Designer.Controls.SizeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GSM_Designer.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="300">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Widht :" Grid.Row="0"/>
+        <TextBox Text="Width" Grid.Column="1" Grid.Row="0"/>
+        <Label Content="Inches"  Grid.Row="0" Grid.Column="4"/>
+
+        <Label Content="Height :" Grid.Row="2"/>
+        <TextBox Text="Height" Foreground="#212121" Grid.Column="1" Grid.Row="2"/>
+        <Label Content="Inches" Grid.Row="2" Grid.Column="2"/>
+
+    </Grid>
+</UserControl>

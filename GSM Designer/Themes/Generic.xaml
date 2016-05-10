@@ -3,9 +3,9 @@
                     xmlns:local="clr-namespace:GSM_Designer.Themes">
 
     <Color x:Key="DropShadowBrush">#1e000000</Color>
-    
+
     <DropShadowEffect x:Key="DropShadow" Color="{StaticResource DropShadowBrush}"/>
-    
+
     <Style TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -17,10 +17,29 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-   
-    
+
+
     <Style TargetType="ListViewItem">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Padding" Value="4,4,4,3"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#212121"/>
     </Style>
 </ResourceDictionary>

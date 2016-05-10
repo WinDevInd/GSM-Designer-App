@@ -23,5 +23,20 @@ namespace GSM_Designer
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            string command = Convert.ToString(btn?.CommandParameter);
+            switch(command)
+            {
+                case "apply":
+                    //// do something
+                    break;
+                case "ok":
+                    this.Close();
+                    break;
+            }
+        }
     }
 }
