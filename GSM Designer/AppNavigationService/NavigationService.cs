@@ -49,15 +49,15 @@ namespace GSM_Designer.AppNavigationService
 
         public void GoBack(CustomWindow currentWindow, object navigationPayload = null)
         {
-            NavigationStack.Pop();
+            var  pageType = NavigationStack.Pop();
             if (NavigationStack.Any())
             {
-                var pageType = NavigationStack.Peek();
                 if (!NavigationStack.Contains(pageType))
                 {
                     windowsCache.Remove(pageType);
                 }
-                NaviagetToPage(true, pageType, currentWindow, navigationPayload);
+                var topItemOnStack = NavigationStack.Peek();
+                NaviagetToPage(true, topItemOnStack, currentWindow, navigationPayload);
             }
             else
             {

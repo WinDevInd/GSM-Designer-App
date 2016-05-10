@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GSM_Designer.Pages"
         mc:Ignorable="d"
-        Title="ImageCropping" Height="500" Width="700">
+        Title="ImageCropping" MinHeight="500" MinWidth="700">
 
     <Window.Resources>
         <Style TargetType="Image">
@@ -14,50 +14,91 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Margin" Value="0,4"/>
-        </Style>
+       
+
+
     </Window.Resources>
-    <Grid Margin="16">
+
+    <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="0.15*" />
         </Grid.ColumnDefinitions>
 
-        <Viewbox Grid.Row="1" Grid.Column="0">
-            <Image x:Name="PrimaryImage"  Source="{Binding Files[0].FilePath}"/>
-        </Viewbox>
-        <TextBlock Text="A"  Grid.Row="2"/>
+        <Grid Grid.Row="1" Margin="0,4" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Viewbox>
+                <Image x:Name="PrimaryImage" MinWidth="100"  Source="{Binding Files[0].FilePath}"/>
+            </Viewbox>
+            <TextBlock Text="A" Grid.Row="1"/>
+        </Grid>
 
-        <Viewbox Grid.Row="1" Grid.Column="1">
-            <Image x:Name="BImage" Source="{Binding Files[1].FilePath}" />
-        </Viewbox>
-        <TextBlock Text="B"  Grid.Column="1" Grid.Row="2"/>
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+            </Grid.RowDefinitions>
 
-        <Viewbox Grid.Row="1" Grid.Column="2">
-            <Image x:Name="CImage" Source="{Binding Files[2].FilePath}"/>
-        </Viewbox>
-        <TextBlock Text="C"  Grid.Column="2" Grid.Row="2"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Viewbox Grid.Row="1" Grid.Column="3">
-            <Image x:Name="DImage" Source="{Binding Files[3].FilePath}"/>
-        </Viewbox>
-        <TextBlock Text="D"  Grid.Column="3" Grid.Row="2"/>
+            <!--1st Half-->
+            <Viewbox Grid.Row="0" Grid.Column="0">
+                <Image x:Name="BImage" Source="{Binding Files[1].FilePath}" />
+            </Viewbox>
+            <TextBlock Text="B"  Grid.Column="0" Grid.Row="1"/>
 
+            <Viewbox Grid.Row="0" Grid.Column="2">
+                <Image x:Name="CImage" Source="{Binding Files[2].FilePath}"/>
+            </Viewbox>
+            <TextBlock Text="C"  Grid.Column="2" Grid.Row="1"/>
+            <!--1st Half End-->
+
+            <!--2nd half-->
+            <Viewbox Grid.Row="3" Grid.Column="0">
+                <Image x:Name="DImage" Source="{Binding Files[3].FilePath}"/>
+            </Viewbox>
+            <TextBlock Text="D"  Grid.Column="0" Grid.Row="4"/>
+
+            <Viewbox Grid.Row="3" Grid.Column="2">
+                <Image x:Name="EImage" Source="{Binding Files[4].FilePath}" />
+            </Viewbox>
+            <TextBlock Text="E"  Grid.Column="2" Grid.Row="4"/>
+            <!--2nd half end-->
+        </Grid>
+
+        <!--Preview Grid-->
         <Viewbox Grid.Row="1" Grid.Column="4">
-            <Image x:Name="EImage" Source="{Binding Files[4].FilePath}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image x:Name="BCropped" Margin="0" Grid.Row="0"/>
+                <Image x:Name="CCropped" Margin="0,4,0,0" Grid.Row="1"/>
+                <Image x:Name="DCropped" Margin="0,4,0,0" Grid.Row="2"/>
+                <Image x:Name="ECropped" Margin="0,4,0,0" Grid.Row="3"/>
+            </Grid>
         </Viewbox>
-        <TextBlock Text="E"  Grid.Column="4" Grid.Row="2"/>
+        
     </Grid>
 </base:CustomWindow>
