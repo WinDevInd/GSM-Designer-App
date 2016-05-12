@@ -14,9 +14,6 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
-       
-
-
     </Window.Resources>
 
     <Grid Margin="8">
@@ -38,7 +35,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Viewbox>
-                <Image x:Name="PrimaryImage" MinWidth="100"  Source="{Binding Files[0].FilePath}"/>
+                <Image x:Name="PrimaryImage" MinWidth="100"/>
             </Viewbox>
             <TextBlock Text="A" Grid.Row="1"/>
         </Grid>
@@ -61,24 +58,24 @@
 
             <!--1st Half-->
             <Viewbox Grid.Row="0" Grid.Column="0">
-                <Image x:Name="BImage" Source="{Binding Files[1].FilePath}" />
+                <Image x:Name="BImage" />
             </Viewbox>
             <TextBlock Text="B"  Grid.Column="0" Grid.Row="1"/>
 
             <Viewbox Grid.Row="0" Grid.Column="2">
-                <Image x:Name="CImage" Source="{Binding Files[2].FilePath}"/>
+                <Image x:Name="CImage" />
             </Viewbox>
             <TextBlock Text="C"  Grid.Column="2" Grid.Row="1"/>
             <!--1st Half End-->
 
             <!--2nd half-->
             <Viewbox Grid.Row="3" Grid.Column="0">
-                <Image x:Name="DImage" Source="{Binding Files[3].FilePath}"/>
+                <Image x:Name="DImage" />
             </Viewbox>
             <TextBlock Text="D"  Grid.Column="0" Grid.Row="4"/>
 
             <Viewbox Grid.Row="3" Grid.Column="2">
-                <Image x:Name="EImage" Source="{Binding Files[4].FilePath}" />
+                <Image x:Name="EImage"  />
             </Viewbox>
             <TextBlock Text="E"  Grid.Column="2" Grid.Row="4"/>
             <!--2nd half end-->

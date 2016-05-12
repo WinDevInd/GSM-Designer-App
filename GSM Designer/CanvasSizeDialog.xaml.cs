@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GSM_Designer.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,12 +27,14 @@ namespace GSM_Designer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            FileCroppingVM vm = this.DataContext as FileCroppingVM;
             Button btn = sender as Button;
             string command = Convert.ToString(btn?.CommandParameter);
             switch(command)
             {
                 case "apply":
                     //// do something
+                    vm.ApplySize(true);
                     break;
                 case "ok":
                     this.Close();

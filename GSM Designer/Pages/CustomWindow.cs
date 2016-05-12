@@ -38,6 +38,7 @@ namespace GSM_Designer.Pages
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+            GC.Collect();
             CustomNavigationService.GetNavigationService().GoBack(this);
         }
 

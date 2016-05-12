@@ -1,0 +1,39 @@
+﻿<base:CustomWindow x:Class="GSM_Designer.ImageCrop"
+        xmlns:base="clr-namespace:GSM_Designer.Pages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GSM_Designer"
+        mc:Ignorable="d"
+        Title="ImageCrop">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="ImageContainer" Margin="8" Grid.RowSpan="5" Grid.Column="0" />
+
+
+        <Image x:Name="BCrop" Margin="8" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"/>
+        <Image x:Name="CCrop" Margin="8" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"/>
+        <Image x:Name="DCrop" Margin="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"/>
+        <Image x:Name="ECrop" Margin="8" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"/>
+
+
+        <Button Content="Size" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Margin="0,16,132,0" Click="SizeButton_Click" />
+        <Button Content="Apply" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" />
+        <Button Content="Crop" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Margin="0,16,244,0" />
+    </Grid>
+</base:CustomWindow>

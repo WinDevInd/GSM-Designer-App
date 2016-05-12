@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GSM_Designer"
         xmlns:Controls="clr-namespace:GSM_Designer.Controls" x:Class="GSM_Designer.CanvasSizeDialog"
         mc:Ignorable="d"
-        Title="CanvasSize" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="CanvasSize" Height="350" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
 
     <Grid Grid.Row="1" Margin="0,4">
         <Grid.RowDefinitions>
@@ -17,12 +17,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Primary Canvas Dimensions" Margin="0,4"/>
-        <Controls:SizeControl Grid.Row="1"/>
+        <Controls:SizeControl Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
 
         <Label Content="Secondary Canvases Crop box size" Grid.Row="2" Margin="0,4"/>
-        <Controls:SizeControl Grid.Row="3"/>
+        <Controls:SizeControl Grid.Row="3" CanvasWidth="{Binding CroppingWidth,Mode=TwoWay}" CanvasHeight="{Binding CroppingHeight,Mode=TwoWay}"/>
 
-        <Button Content="Apply" Grid.Row="4" Margin="73,16,0,0" Click="Button_Click" CommandParameter="ok"/>
+        <Button Content="Apply" Grid.Row="4" Margin="0,16,128,0" HorizontalAlignment="Right" Click="Button_Click" CommandParameter="ok"/>
         <Button Content="OK" Grid.Row="4" Margin="0,16,16,0" HorizontalAlignment="Right" Click="Button_Click" CommandParameter="apply"/>
     </Grid>
 </Window>

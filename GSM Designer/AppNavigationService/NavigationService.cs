@@ -26,7 +26,7 @@ namespace GSM_Designer.AppNavigationService
                 case PageType.SelectFile:
                     return typeof(SelectFileWindow);
                 case PageType.ImageCropping:
-                    return typeof(ImageCroppingWindow);
+                    return typeof(ImageCrop);
             }
             return null;
         }

@@ -18,12 +18,59 @@ namespace GSM_Designer.Pages
     /// <summary>
     /// Interaction logic for ImageCropping.xaml
     /// </summary>
-    public partial class ImageCroppingWindow : CustomWindow
+    public partial class ImageCroppingWindow : CustomWindow, iImageWidgetController
     {
+        FileCroppingVM vm;
         public ImageCroppingWindow()
         {
             InitializeComponent();
-            this.DataContext = InfoViewModel.Instance;
+            FileCroppingVM vm = new FileCroppingVM();
+            vm.RegisterController(this);
+            vm.LoadFiles(InfoViewModel.Instance.Files);
+            this.DataContext = vm;
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSource(object BitmapImage, int containerIndex)
+        {
+            this.Dispatcher.InvokeAsync(new Action(() =>
+            {
+                switch (containerIndex)
+                {
+                    case 0:
+                        this.PrimaryImage.Source = BitmapImage as ImageSource;
+                        break;
+                    case 1:
+                        this.BImage.Source = BitmapImage as ImageSource;
+                        break;
+                    case 2:
+                        this.CImage.Source = BitmapImage as ImageSource;
+                        break;
+                    case 3:
+                        this.DImage.Source = BitmapImage as ImageSource;
+                        break;
+                    case 4:
+                        this.EImage.Source = BitmapImage as ImageSource;
+                        break;
+                }
+            }));
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            this.PrimaryImage.Source = null;
+            this.BImage.Source = null;
+            this.CImage.Source = null;
+            this.DImage.Source = null;
+            this.EImage.Source = null;
+            base.OnClosed(e);
+            vm = null;
+
+
         }
     }
 }

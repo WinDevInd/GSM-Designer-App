@@ -10,8 +10,8 @@ namespace GSM_Designer
     /// </summary>
     public partial class App : Application
     {
-        static TPL.TPL TaskQueue;
-        static Dispatcher UIDispatcher;
+        public static TPL.TPL TaskQueue;
+        public static Dispatcher UIDispatcher;
         public App()
         {
             TaskQueue = new TPL.TPL(3);

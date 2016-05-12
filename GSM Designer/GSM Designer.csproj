@@ -65,6 +65,9 @@
     <Compile Include="Controls\SizeControl.xaml.cs">
       <DependentUpon>SizeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageCrop.xaml.cs">
+      <DependentUpon>ImageCrop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomWindow.cs" />
     <Compile Include="Pages\iImageWidgetController.cs" />
     <Compile Include="Pages\iCustomnavigation.cs" />
@@ -86,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SizeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageCrop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,6 +2,7 @@
 {
     public interface iImageWidgetController
     {
-        void SetSource(object BitmapImage, double widht, double height,int containerIndex);
+        void SetSource(object BitmapImage, int containerIndex);
+        void Reset();
     }
 }
