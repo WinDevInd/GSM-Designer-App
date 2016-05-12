@@ -46,14 +46,14 @@ namespace GSM_Designer.ViewModel
             set { SetFieldAndNotify(ref _PatternName, value); }
         }
 
-        private double _Width = 9;
+        private double _Width = 2;
         public double Width
         {
             get { return _Width; }
             set { SetFieldAndNotify(ref _Width, value); }
         }
 
-        private double _Height = 6.5;
+        private double _Height = 5;
         public double Height
         {
             get { return _Height; }
@@ -101,7 +101,7 @@ namespace GSM_Designer.ViewModel
         {
             if (Images == null || !Images.Any())
                 return;
-            for (int i = 0; i < Images.Count; i++)
+            for (int i = 0; i < 1; i++)
             {
                 bool process = i == 0 ? true : false;
                 if (File.Exists(Images[i]?.FilePath))
@@ -113,7 +113,7 @@ namespace GSM_Designer.ViewModel
 
         private async Task ProcessImage(string file, double requiredWidth, double requiredHeight, int index, bool process = false)
         {
-            App.TaskQueue.ExecuteTaskAsync(() =>
+            await App.TaskQueue.ExecuteTaskAsync(() =>
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -139,8 +139,8 @@ namespace GSM_Designer.ViewModel
                         decoder = null;
                     }
                 }
-                GC.Collect();
             }, new TPL.TaskParams(TPL.Priority.Medium));
+            GC.Collect();
         }
 
     }

@@ -85,13 +85,13 @@ namespace GSM_Designer.Utils
             int destiantionImageHeight = (int)(size.Height);
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
             {
-                int XIncrment = (int)Math.Min(destinationImageWidth, source.Width);
-                int YIncrement = (int)Math.Min(destiantionImageHeight, source.Height);
+                int XIncrment = (int)Math.Min(destinationImageWidth * (dpiX / dpiConst), source.Width);
+                int YIncrement = (int)Math.Min(destiantionImageHeight * (dpiY / dpiConst), source.Height);
                 for (int startPointY = 0; startPointY < destiantionImageHeight; startPointY += Math.Min(YIncrement, destiantionImageHeight - startPointY))
                 {
                     for (int startPointX = 0; startPointX < destinationImageWidth; startPointX += Math.Min(XIncrment, destinationImageWidth - startPointX))
                     {
-                        drawingContext.DrawImage(source, new Rect(startPointX, startPointY, XIncrment, YIncrement));
+                        drawingContext.DrawImage(source, new Rect(new Point(startPointX, startPointY), new Size(XIncrment, YIncrement)));
                     }
                 }
             }
