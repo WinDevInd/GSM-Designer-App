@@ -24,7 +24,7 @@ namespace GSM_Designer.Pages
         public ImageCroppingWindow()
         {
             InitializeComponent();
-            FileCroppingVM vm = new FileCroppingVM();
+            FileCroppingVM vm = FileCroppingVM.Instance;
             vm.RegisterController(this);
             vm.LoadFiles(InfoViewModel.Instance.Files);
             this.DataContext = vm;
@@ -32,7 +32,6 @@ namespace GSM_Designer.Pages
 
         public void Reset()
         {
-            throw new NotImplementedException();
         }
 
         public void SetSource(object BitmapImage, int containerIndex)

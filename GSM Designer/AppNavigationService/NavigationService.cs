@@ -42,14 +42,17 @@ namespace GSM_Designer.AppNavigationService
         Dictionary<PageType, CustomWindow> windowsCache = new Dictionary<PageType, CustomWindow>();
         Stack<PageType> NavigationStack = new Stack<PageType>();
 
-        public void Navigate(PageType pageType, CustomWindow currentWindow, object navigationPayload = null)
+        public void Navigate(PageType pageType, CustomWindow currentWindow, object navigationPayload = null, bool autoRemove = false)
         {
-            NaviagetToPage(false, pageType, currentWindow, navigationPayload);
+            if (!autoRemove)
+                NaviagetToPage(false, pageType, currentWindow, navigationPayload);
+            else
+                NaviagetToPage(pageType, currentWindow, navigationPayload); /// no history maintain
         }
 
         public void GoBack(CustomWindow currentWindow, object navigationPayload = null)
         {
-            var  pageType = NavigationStack.Pop();
+            var pageType = NavigationStack.Pop();
             if (NavigationStack.Any())
             {
                 if (!NavigationStack.Contains(pageType))
@@ -79,6 +82,15 @@ namespace GSM_Designer.AppNavigationService
             var window = windowsCache[pageType];
             currentWindow?.Hide();
             (window as iCustomNavigationService)?.Navigate(null);
+        }
+
+        private void NaviagetToPage(PageType pageType, CustomWindow currentWindow, object navigationPyload)
+        {
+            var type = GetPage(pageType);
+            var newWindow = (CustomWindow)Activator.CreateInstance(type);
+            currentWindow.Hide();
+            newWindow.Show();
+
         }
     }
 }

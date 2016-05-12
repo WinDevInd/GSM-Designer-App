@@ -78,7 +78,7 @@ namespace GSM_Designer
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomNavigationService.GetNavigationService().Navigate(PageType.PatternName, this);
+            CustomNavigationService.GetNavigationService().Navigate(PageType.PatternName, this, null, true);
         }
 
         #region ListView ReOrder

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,7 @@ namespace GSM_Designer.Controls
         {
             InitializeComponent();
         }
+        public event EventHandler<TextChangedEventArgs> TextChanged;
 
         public double CanvasWidth
         {
@@ -36,17 +38,37 @@ namespace GSM_Designer.Controls
             DependencyProperty.Register("CanvasWidth", typeof(double), typeof(SizeControl), new PropertyMetadata(16.5));
 
 
-        public double  CanvasHeight
+        public double CanvasHeight
         {
-            get { return (double )GetValue(CanvasHeightProperty); }
+            get { return (double)GetValue(CanvasHeightProperty); }
             set { SetValue(CanvasHeightProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CanvasHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CanvasHeightProperty =
-            DependencyProperty.Register("CanvasHeight", typeof(double ), typeof(SizeControl), new PropertyMetadata(9.45));
+            DependencyProperty.Register("CanvasHeight", typeof(double), typeof(SizeControl), new PropertyMetadata(9.45));
 
 
+        private void TextBox_TextChanged(object sender, TextCompositionEventArgs e)
+        {
+            var regex = new Regex(@"^-*[0-9,\.]+$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                
+            }
+        }
 
+
+        private void TextBox_TextChanged_Route(object sender, TextChangedEventArgs e)
+        {
+            if (this.TextChanged != null)
+            {
+                this.TextChanged(sender, e);
+            }
+        }
     }
 }

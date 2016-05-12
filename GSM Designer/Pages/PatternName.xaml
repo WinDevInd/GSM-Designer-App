@@ -1,18 +1,39 @@
 ﻿<base:CustomWindow x:Class="GSM_Designer.Pages.PatternNameWindow"
-        xmlns:base="clr-namespace:GSM_Designer.Pages"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GSM_Designer.Pages"
-        mc:Ignorable="d"
-        Title="Enter Pattern Name" Height="200" Width="300" 
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <StackPanel Margin="0,16">
+                   xmlns:Controls="clr-namespace:GSM_Designer.Controls"
+                   xmlns:base="clr-namespace:GSM_Designer.Pages"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:local="clr-namespace:GSM_Designer.Pages"
+                   mc:Ignorable="d"
+                   Title="Enter Pattern Name" Height="446" Width="300" 
+                   WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+
+    <StackPanel Margin="8">
         <Label Content="Enter Pattern Name" Margin="16,0" Padding="0,4" />
-        <TextBox x:Name="TextBox" Margin="16,4" Padding="4,3,4,4" FontSize="14"
+        <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
                  TextChanged="TextBox_TextChanged"
                  HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="250" VerticalAlignment="Stretch"/>
-        <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" IsEnabled="False" Click="NextButton_Click" />
+
+
+        <Grid Margin="0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Primary Canvas Dimensions" Margin="0,4"/>
+            <Controls:SizeControl TextChanged="SizeControl_PreviewTextChanged" Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
+
+            <Label Content="Secondary Canvases Crop box size" Grid.Row="2" Margin="0,4"/>
+            <Controls:SizeControl Grid.Row="3" TextChanged="SizeControl_PreviewTextChanged" CanvasWidth="{Binding CroppedWidth,Mode=TwoWay}" CanvasHeight="{Binding CroppedHeight,Mode=TwoWay}"/>
+        </Grid>
+
+        <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 
+                Click="NextButton_Click" />
     </StackPanel>
+
+
 </base:CustomWindow>

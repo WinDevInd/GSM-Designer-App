@@ -11,6 +11,24 @@ namespace GSM_Designer.Pages
     public class CustomWindow : Window, iCustomNavigationService
     {
         private object navigationPayLaod = null;
+        public bool IsDialog { get; private set; }
+        private void Init()
+        {
+            this.Effect = new System.Windows.Media.Effects.DropShadowEffect()
+            {
+                Color = new System.Windows.Media.Color() { A = 12, R = 00, G = 00, B = 00 },
+                BlurRadius = 1,
+                ShadowDepth = 2
+            };
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        public CustomWindow(bool isDialog)
+        {
+            Init();
+            this.IsDialog = isDialog;
+        }
+
         public CustomWindow()
         {
             this.Effect = new System.Windows.Media.Effects.DropShadowEffect()
@@ -38,8 +56,11 @@ namespace GSM_Designer.Pages
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            GC.Collect();
-            CustomNavigationService.GetNavigationService().GoBack(this);
+            if (!IsDialog)
+            {
+                GC.Collect();
+                CustomNavigationService.GetNavigationService().GoBack(this);
+            }
         }
 
         public virtual void Navigated(object payload)

@@ -22,13 +22,13 @@ namespace GSM_Designer
     public partial class ImageCrop : CustomWindow, iImageWidgetController
     {
         private FileCroppingVM fileCroppingVM;
+        private bool canMoveCropBox = false;
         public ImageCrop()
         {
-            fileCroppingVM = new FileCroppingVM();
+            fileCroppingVM = FileCroppingVM.Instance;
             InitializeComponent();
             this.DataContext = fileCroppingVM;
         }
-
 
         public override void Navigated(object payload)
         {
@@ -42,32 +42,103 @@ namespace GSM_Designer
             fileCroppingVM.LoadFiles(images);
         }
 
-        public void SetSource(object BitmapImage, int containerIndex)
+        public void SetSource(object bitmapImage, int containerIndex)
         {
-
-            if (containerIndex == 0)
+            this.Dispatcher.InvokeAsync(new Action(() =>
             {
-                this.Dispatcher.InvokeAsync(new Action(() =>
+                var imageSource = bitmapImage as ImageSource;
+                switch (containerIndex)
                 {
-                    this.ImageContainer.Source = BitmapImage as ImageSource;
-                }));
-            }
+                    case 0:
+                        this.ImageContainer.Source = imageSource;
+                        var source = (bitmapImage as BitmapFrame);
+                        var height = fileCroppingVM.Height * source.DpiX;
+                        var width = fileCroppingVM.Width * source.DpiY;
+                        this.ImageContainer.Height = height;
+                        this.ImageContainer.Width = width;
+                        CompletArea.Rect = new Rect(0, 0, width, height);
+                        InteractionArea.Rect = new Rect(0, 0, fileCroppingVM.CroppedWidth * source.DpiX, fileCroppingVM.CroppingHeight * source.DpiY);
+                        break;
+                    case 1:
+                        this.BCrop.Source = imageSource;
+                        break;
+                    case 2:
+                        this.CCrop.Source = imageSource;
+                        break;
+                    case 3:
+                        this.DCrop.Source = imageSource;
+                        break;
+                    case 4:
+                        this.ECrop.Source = imageSource;
+                        break;
+                }
+            }));
         }
+
 
         private void SizeButton_Click(object sender, RoutedEventArgs e)
         {
-            CanvasSizeDialog c = new CanvasSizeDialog();
-            c.DataContext = this.DataContext;
+            PatternNameWindow c = new PatternNameWindow(this.DataContext);
             c.ShowDialog();
         }
 
         public void Reset()
         {
+            CompletArea.Rect = new Rect(0, 0, 0, 0);
             this.ImageContainer.Source = null;
             this.BCrop.Source = null;
             this.CCrop.Source = null;
             this.DCrop.Source = null;
             this.ECrop.Source = null;
         }
+
+        private void path_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            canMoveCropBox = false;
+        }
+
+        private void path_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (canMoveCropBox)
+            {
+                //var pos = e.GetPosition(e.Source as IInputElement);
+                var pos = Mouse.GetPosition(path);
+                var locX = pos.X - InteractionArea.Rect.Width / 2;
+                var locY = pos.Y - InteractionArea.Rect.Height / 2;
+                var boundryX = InteractionArea.Rect.Width + pos.X;
+                var boundryY = InteractionArea.Rect.Height + pos.Y;
+                var x = pos.X;
+                var y = pos.Y;
+                if (boundryX > CompletArea.Rect.Width)
+                {
+                    x = CompletArea.Rect.Width - InteractionArea.Rect.Width;
+                }
+                else if (x < 0)
+                {
+                    x = 0;
+                }
+                if (boundryY > CompletArea.Rect.Height)
+                {
+                    y = CompletArea.Rect.Height - InteractionArea.Rect.Height;
+                }
+                else if (y < 0)
+                {
+                    y = 0;
+                }
+                InteractionArea.Rect = new Rect(x, y, InteractionArea.Rect.Width, InteractionArea.Rect.Height);
+            }
+        }
+
+        private void path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            canMoveCropBox = true;
+
+        }
+
+        private void CropButton_Click(object sender, RoutedEventArgs e)
+        {
+            fileCroppingVM.Crop(InteractionArea.Rect.X, InteractionArea.Rect.Y, 300, 300);
+        }
+
     }
 }

@@ -21,11 +21,11 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Widht :" Grid.Row="0"/>
-        <TextBox Text="{Binding CanvasWidth,ElementName=SizeWidget}" Grid.Column="1" Grid.Row="0"/>
+        <TextBox PreviewTextInput="TextBox_TextChanged" TextChanged="TextBox_TextChanged_Route" Text="{Binding CanvasWidth,ElementName=SizeWidget}" Grid.Column="1" Grid.Row="0"/>
         <Label Content="Inches"  Grid.Row="0" Grid.Column="4"/>
 
         <Label Content="Height :" Grid.Row="2"/>
-        <TextBox Text="{Binding CanvasHeight,ElementName=SizeWidget}" Foreground="#212121" Grid.Column="1" Grid.Row="2"/>
+        <TextBox PreviewTextInput="TextBox_TextChanged" TextChanged="TextBox_TextChanged_Route" Text="{Binding CanvasHeight,ElementName=SizeWidget}" Foreground="#212121" Grid.Column="1" Grid.Row="2"/>
         <Label Content="Inches" Grid.Row="2" Grid.Column="2"/>
 
     </Grid>

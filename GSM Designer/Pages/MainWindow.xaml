@@ -70,10 +70,6 @@
                   PreviewMouseMove="ListViewPreviewMouseMove"
                   PreviewMouseLeftButtonDown="ListViewMouseLeftButtonDown"
                   ItemTemplate="{StaticResource FileListStyle}"/>
-
-
-
-
     </Grid>
 </base:CustomWindow>
 
