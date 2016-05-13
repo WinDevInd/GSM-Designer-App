@@ -65,8 +65,10 @@ namespace GSM_Designer.Controls
 
         private void TextBox_TextChanged_Route(object sender, TextChangedEventArgs e)
         {
+            var tag = (sender as TextBox).Tag;
             if (this.TextChanged != null)
             {
+                e.Source = tag;
                 this.TextChanged(sender, e);
             }
         }

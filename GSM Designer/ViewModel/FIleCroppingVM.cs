@@ -57,35 +57,49 @@ namespace GSM_Designer.ViewModel
             this.controller = controller;
         }
 
-        private string _PatternName;
+        private string _PatternName = "GSM PTRN 1";
         public string PatternName
         {
             get { return _PatternName; }
             set { SetFieldAndNotify(ref _PatternName, value); }
         }
 
-        private double _Width = 2;
+        private double _Width = 18.5;
         public double Width
         {
             get { return _Width; }
-            set { SetFieldAndNotify(ref _Width, value); }
+            set
+            {
+                if (_Width != value)
+                {
+                    _Width = value;
+                    CroppedWidth = (value - 0.5) / 2;
+                }
+            }
         }
 
-        private double _Height = 5;
+        private double _Height = 16;
         public double Height
         {
             get { return _Height; }
-            set { SetFieldAndNotify(ref _Height, value); }
+            set
+            {
+                if (_Height != value)
+                {
+                    _Height = value;
+                    CroppedHeight = _Height / 4;
+                }
+            }
         }
 
-        private double _CroppedHeight = 4.5;
-        public double CroppingHeight
+        private double _CroppedHeight = 4;
+        public double CroppedHeight
         {
             get { return _CroppedHeight; }
             set { SetFieldAndNotify(ref _CroppedHeight, value); }
         }
 
-        private double _CroppedWidth = 5.0;
+        private double _CroppedWidth = 9;
         public double CroppedWidth
         {
             get { return _CroppedWidth; }
@@ -143,7 +157,7 @@ namespace GSM_Designer.ViewModel
                     imageSource.BeginInit();
                     imageSource.UriSource = new Uri(fileName, UriKind.RelativeOrAbsolute);
                     imageSource.EndInit();
-                    var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(CroppedWidth * dpiX, CroppingHeight * dpiY),
+                    var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(CroppedWidth * dpiX, CroppedHeight * dpiY),
                         new System.Windows.Point(x, y));
                     var bitmapEncoder = new JpegBitmapEncoder();
                     bitmapEncoder.Frames.Add(BitmapFrame.Create(imageToSave));

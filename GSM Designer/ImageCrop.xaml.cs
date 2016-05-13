@@ -57,7 +57,7 @@ namespace GSM_Designer
                         this.ImageContainer.Height = height;
                         this.ImageContainer.Width = width;
                         CompletArea.Rect = new Rect(0, 0, width, height);
-                        InteractionArea.Rect = new Rect(0, 0, fileCroppingVM.CroppedWidth * source.DpiX, fileCroppingVM.CroppingHeight * source.DpiY);
+                        InteractionArea.Rect = new Rect(0, 0, fileCroppingVM.CroppedWidth * source.DpiX, fileCroppingVM.CroppedHeight * source.DpiY);
                         break;
                     case 1:
                         this.BCrop.Source = imageSource;

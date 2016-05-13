@@ -37,7 +37,7 @@ namespace GSM_Designer.Pages
 
         private void NextButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (fileCroppingVM.Width != 0 || fileCroppingVM.Height != 0 || fileCroppingVM.CroppedWidth != 0 || fileCroppingVM.CroppingHeight != 0)
+            if (fileCroppingVM.Width != 0 || fileCroppingVM.Height != 0 || fileCroppingVM.CroppedWidth != 0 || fileCroppingVM.CroppedHeight != 0)
             {
                 if (!isDialog)
                 {
@@ -54,6 +54,16 @@ namespace GSM_Designer.Pages
         {
             var text = (sender as TextBox).Text;
             NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(text) && text != "0";
+            switch(e.Source.ToString())
+            {
+                case "Width": 
+                    fileCroppingVM.Width = double.Parse(text);
+                    break;
+                case "Height":
+                    fileCroppingVM.Height = double.Parse(text);
+                    break;
+
+            }
         }
     }
 }

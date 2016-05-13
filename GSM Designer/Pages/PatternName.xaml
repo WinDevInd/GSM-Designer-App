@@ -13,9 +13,9 @@
     <StackPanel Margin="8">
         <Label Content="Enter Pattern Name" Margin="16,0" Padding="0,4" />
         <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
-                 TextChanged="TextBox_TextChanged"
+                 TextChanged="TextBox_TextChanged" Text="{Binding PatternName,Mode=TwoWay}"
                  HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="250" VerticalAlignment="Stretch"/>
-
+ 
 
         <Grid Margin="0,4">
             <Grid.RowDefinitions>
@@ -28,7 +28,27 @@
             <Controls:SizeControl TextChanged="SizeControl_PreviewTextChanged" Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
 
             <Label Content="Secondary Canvases Crop box size" Grid.Row="2" Margin="0,4"/>
-            <Controls:SizeControl Grid.Row="3" TextChanged="SizeControl_PreviewTextChanged" CanvasWidth="{Binding CroppedWidth,Mode=TwoWay}" CanvasHeight="{Binding CroppedHeight,Mode=TwoWay}"/>
+            <Grid Background="White" Grid.Row="3" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Widht :" Grid.Row="0"/>
+                <TextBlock  Text="{Binding CroppedWidth}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
+                <Label Content="Inches"  Grid.Row="0" Grid.Column="4"/>
+
+                <Label Content="Height :" Grid.Row="2"/>
+                <TextBlock Text="{Binding CroppedHeight}" VerticalAlignment="Center" Foreground="#212121" Grid.Column="1" Grid.Row="2"/>
+                <Label Content="Inches" Grid.Row="2" Grid.Column="2"/>
+
+            </Grid>
         </Grid>
 
         <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 
