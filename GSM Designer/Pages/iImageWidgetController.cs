@@ -4,5 +4,6 @@
     {
         void SetSource(object BitmapImage, int containerIndex);
         void Reset();
+        void UpdateUI(bool isProcessing);
     }
 }

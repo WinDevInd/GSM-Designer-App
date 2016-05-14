@@ -59,6 +59,11 @@ namespace GSM_Designer.Pages
             }));
         }
 
+        public void UpdateUI(bool isProcessing)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnClosed(EventArgs e)
         {
             this.PrimaryImage.Source = null;
@@ -68,8 +73,6 @@ namespace GSM_Designer.Pages
             this.EImage.Source = null;
             base.OnClosed(e);
             vm = null;
-
-
         }
     }
 }

@@ -17,8 +17,6 @@ namespace GSM_Designer.ViewModel
     {
         public ExtendedImageFileInfo()
         {
-
-
         }
         public ExtendedImageFileInfo(ImageFileInfo info)
         {
@@ -32,6 +30,10 @@ namespace GSM_Designer.ViewModel
 
     public class FileCroppingVM : BaseViewModel
     {
+        private static double DefaultWidth = 18.5;
+        private static double DefaultHeight = 16.5;
+        private double CurrentWidth = DefaultWidth;
+        private double currentHeight = DefaultHeight;
         private static FileCroppingVM _Instance;
         private iImageWidgetController controller;
 
@@ -49,6 +51,25 @@ namespace GSM_Designer.ViewModel
             get
             {
                 return _Instance;
+            }
+        }
+
+        private bool _IsLoading;
+
+        public bool IsLoading
+        {
+            get { return _IsLoading; }
+            set
+            {
+                if (value != _IsLoading)
+                {
+                    _IsLoading = value;
+                    OnPropertyChanged();
+                    if (this.controller != null)
+                    {
+                        controller.UpdateUI(value);
+                    }
+                }
             }
         }
 
@@ -92,6 +113,9 @@ namespace GSM_Designer.ViewModel
             }
         }
 
+        public double DPIX { get; set; }
+        public double DPIY { get; set; }
+
         private double _CroppedHeight = 4;
         public double CroppedHeight
         {
@@ -128,6 +152,7 @@ namespace GSM_Designer.ViewModel
 
         public async Task ApplySize(bool reset = false)
         {
+            IsLoading = true;
             if (Images == null || !Images.Any())
                 return;
             if (reset && controller != null)
@@ -136,51 +161,28 @@ namespace GSM_Designer.ViewModel
             }
             for (int i = 0; i < Images.Count; i++)
             {
-                bool process = i == 0 ? true : false;
+                bool callbackToView = i == 0 ? true : false;
                 await App.TaskQueue.ExecuteTaskAsync(() =>
                 {
                     if (File.Exists(Images[i]?.FilePath))
                     {
-                        ProcessImage(Images[i].FilePath, Width, Height, i, process);
+                        ProcessImage(Images[i].FilePath, Width, Height, i, callbackToView);
                     }
                 }, new TPL.TaskParams(TPL.Priority.Medium));
             }
+            IsLoading = false;
         }
-        public async Task Crop(double x, double y, int dpiX, int dpiY)
+
+        public async Task CropSelectedAreaInSecondaryImages(double x, double y)
         {
+            IsLoading = true;
             for (int i = 1; i < Images.Count; i++)
-            {
-                var fileName = i + ".jpg";
-                if (File.Exists(fileName))
-                {
-                    var imageSource = new BitmapImage();
-                    imageSource.BeginInit();
-                    imageSource.UriSource = new Uri(fileName, UriKind.RelativeOrAbsolute);
-                    imageSource.EndInit();
-                    var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(CroppedWidth * dpiX, CroppedHeight * dpiY),
-                        new System.Windows.Point(x, y));
-                    var bitmapEncoder = new JpegBitmapEncoder();
-                    bitmapEncoder.Frames.Add(BitmapFrame.Create(imageToSave));
-                    var finalImage = new BitmapImage();
-                    using (Stream stream = File.Create("cropped" + i + ".jpg"))
-                    {
-                        bitmapEncoder.Save(stream);
-                        bitmapEncoder = null;
-                        finalImage = null;
-                        imageSource = null;
-                    }
-                    using (FileStream stream = File.OpenRead("cropped" + i + ".jpg"))
-                    {
-                        var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-                        var decodedImage = decoder.Frames[0];
-                        if (this.controller != null)
-                        {
-                            controller.SetSource(decodedImage, i);
-                        }
-                        decoder = null;
-                    }
-                }
-            }
+
+                await App.TaskQueue.ExecuteTaskAsync(() =>
+               {
+                   CropImage(i, x, y);
+               }, new TPL.TaskParams(TPL.Priority.Medium));
+            IsLoading = false;
         }
 
         private async Task ProcessImage(string file, double requiredWidth, double requiredHeight, int index, bool process = false)
@@ -191,6 +193,11 @@ namespace GSM_Designer.ViewModel
             bitmapImage.EndInit();
             var width = bitmapImage.DpiX * requiredWidth;
             var height = bitmapImage.DpiY * requiredHeight;
+            if (process)
+            {
+                DPIX = bitmapImage.DpiX;
+                DPIY = bitmapImage.DpiY;
+            }
             var fileName = index + ".jpg";
             var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName);
             bitmapImage = null;
@@ -200,6 +207,7 @@ namespace GSM_Designer.ViewModel
             {
                 using (FileStream stream = File.OpenRead(fileName))
                 {
+
                     decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
                     var decodedImage = decoder.Frames[0];
                     if (this.controller != null)
@@ -212,5 +220,39 @@ namespace GSM_Designer.ViewModel
             GC.Collect(0, GCCollectionMode.Optimized);
         }
 
+        private async Task CropImage(int index, double x, double y)
+        {
+            var fileName = index + ".jpg";
+            var croppedFileName = "cropped" + index + ".jpg";
+            if (File.Exists(fileName))
+            {
+                var imageSource = new BitmapImage();
+                imageSource.BeginInit();
+                imageSource.UriSource = new Uri(fileName, UriKind.RelativeOrAbsolute);
+                imageSource.EndInit();
+                var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(CroppedWidth * DPIX, CroppedHeight * DPIY),
+                    new System.Windows.Point(x, y));
+                var bitmapEncoder = new JpegBitmapEncoder();
+                bitmapEncoder.Frames.Add(BitmapFrame.Create(imageToSave));
+                var finalImage = new BitmapImage();
+                using (Stream stream = File.Create(croppedFileName))
+                {
+                    bitmapEncoder.Save(stream);
+                    bitmapEncoder = null;
+                    finalImage = null;
+                    imageSource = null;
+                }
+                using (FileStream stream = File.OpenRead(croppedFileName))
+                {
+                    var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                    var decodedImage = decoder.Frames[0];
+                    if (this.controller != null)
+                    {
+                        controller.SetSource(decodedImage, index);
+                    }
+                    decoder = null;
+                }
+            }
+        }
     }
 }

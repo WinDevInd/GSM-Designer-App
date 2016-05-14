@@ -101,8 +101,7 @@ namespace GSM_Designer
         {
             if (canMoveCropBox)
             {
-                //var pos = e.GetPosition(e.Source as IInputElement);
-                var pos = Mouse.GetPosition(path);
+                var pos = e.GetPosition(path);
                 var locX = pos.X - InteractionArea.Rect.Width / 2;
                 var locY = pos.Y - InteractionArea.Rect.Height / 2;
                 var boundryX = InteractionArea.Rect.Width + pos.X;
@@ -137,8 +136,13 @@ namespace GSM_Designer
 
         private void CropButton_Click(object sender, RoutedEventArgs e)
         {
-            fileCroppingVM.Crop(InteractionArea.Rect.X, InteractionArea.Rect.Y, 300, 300);
+            fileCroppingVM.CropSelectedAreaInSecondaryImages(InteractionArea.Rect.X, InteractionArea.Rect.Y);
         }
 
+        public void UpdateUI(bool isProcessing)
+        {
+            OpacityRect.Visibility = isProcessing ? Visibility.Visible : Visibility.Collapsed;
+            ProgressBar.Visibility = isProcessing ? Visibility.Visible : Visibility.Collapsed;
+        }
     }
 }

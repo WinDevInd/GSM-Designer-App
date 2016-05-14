@@ -54,15 +54,17 @@ namespace GSM_Designer.Pages
         {
             var text = (sender as TextBox).Text;
             NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(text) && text != "0";
-            switch(e.Source.ToString())
+            if (!string.IsNullOrWhiteSpace(text))
             {
-                case "Width": 
-                    fileCroppingVM.Width = double.Parse(text);
-                    break;
-                case "Height":
-                    fileCroppingVM.Height = double.Parse(text);
-                    break;
-
+                switch (e.Source.ToString())
+                {
+                    case "Width":
+                        fileCroppingVM.Width = double.Parse(text);
+                        break;
+                    case "Height":
+                        fileCroppingVM.Height = double.Parse(text);
+                        break;
+                }
             }
         }
     }

@@ -9,7 +9,6 @@
                    MouseMove="path_MouseMove"
                    MouseLeftButtonUp="path_MouseLeftButtonUp"
                    Title="ImageCrop">
-
     <Grid Margin="16" Background="#01000000">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -22,8 +21,9 @@
             <ColumnDefinition Width="0.52*"/>
             <ColumnDefinition Width="0.48*"/>
         </Grid.ColumnDefinitions>
-        <Viewbox Grid.RowSpan="5" Grid.Column="0" HorizontalAlignment="Left">
-            <Grid Height="{Binding Height,ElementName=ImageContainer}" Width="{Binding Width,ElementName=ImageContainer}">
+
+        <Viewbox  Grid.RowSpan="5" Grid.Column="0">
+            <Grid Height="{Binding Height,ElementName=ImageContainer}" HorizontalAlignment="Left" Width="{Binding Width,ElementName=ImageContainer}">
                 <Image x:Name="ImageContainer" Margin="8" HorizontalAlignment="Left" />
                 <Path Stroke="#212121" Fill="#000000" Opacity=".5" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -53,13 +53,15 @@
             </Grid>
         </Viewbox>
 
-
         <Image x:Name="BCrop" Margin="8" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"/>
+
         <Image x:Name="CCrop" Margin="8" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"/>
+
         <Image x:Name="DCrop" Margin="8" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"/>
+
         <Image x:Name="ECrop" Margin="8" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" 
                VerticalAlignment="Stretch"/>
 
@@ -67,5 +69,8 @@
         <Button Content="Size" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Margin="0,16,132,0" Click="SizeButton_Click" />
         <Button Content="Apply" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" />
         <Button Content="Crop" Grid.Row="4" Click="CropButton_Click" Grid.Column="1" HorizontalAlignment="Right" Margin="0,16,244,0" />
+
+        <Rectangle x:Name="OpacityRect" Fill="#8cffffff" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <ProgressBar IsIndeterminate="{Binding IsLoading}" Height="20" x:Name="ProgressBar" Grid.RowSpan="5" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
     </Grid>
 </base:CustomWindow>
