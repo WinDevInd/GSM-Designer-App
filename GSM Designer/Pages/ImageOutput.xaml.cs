@@ -46,21 +46,27 @@ namespace GSM_Designer.Pages
 
         }
 
+
+        protected override void OnClosed(EventArgs e)
+        {
+            //base.OnClosed(e);
+        }
         private void MakeLayout()
         {
-            var paddingXInch = 0.25;
-            var paddingYInch = 0.25;
-
-            double horizontalPadding = (filecroppingVM.DPIX * paddingXInch) / 2;
-            double verticalPadding = filecroppingVM.DPIY * paddingYInch;
+            var innerMarginHorizontal = 50; //Math.Max(50, (filecroppingVM.DPIX * 0.2));
+            var innerMarginVertical = Math.Max(50, (filecroppingVM.DPIY * 0.2));
+            double horizontalPadding = innerMarginHorizontal / 2;
+            double verticalPadding = innerMarginVertical / 2;
 
             DrawingVisual drawingVisual = new DrawingVisual();
 
             double horizontalIncrement = 0;
             double verticalIncrement = 0;
 
-            var canvasWidth = (filecroppingVM.Width + (paddingXInch * 3)) * filecroppingVM.DPIX;
-            var canvasHeight = (filecroppingVM.Height + (filecroppingVM.CroppedHeight * 2) + (paddingYInch * 12)) * filecroppingVM.DPIY;
+            var canvasWidth = (filecroppingVM.Width * filecroppingVM.DPIX) + (innerMarginHorizontal * (filecroppingVM.DPIX / ImageHelper.dpiConst));
+            var canvasHeight = ((filecroppingVM.Height + (filecroppingVM.CroppedHeight * 2))
+                //// 3 margins - top 0.5, bottom 0.5, 1 between image
+                * filecroppingVM.DPIY) + ((innerMarginVertical * (filecroppingVM.DPIY / ImageHelper.dpiConst) * 3.5));
 
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
             {
@@ -78,33 +84,33 @@ namespace GSM_Designer.Pages
                     double nextYLocation = 0;
                     double nextXLocation = 0;
                     var xPoint = nextXLocation + imageSource.Width + horizontalPadding;
-                    var yPoint = nextYLocation + verticalIncrement + (verticalPadding + 10);
+                    var yPoint = nextYLocation + verticalIncrement + verticalPadding + 10;
                     switch (i)
                     {
                         case 0:
                             FormattedText fA = new FormattedText(filecroppingVM.PatternName + " - A", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
                             xPoint -= fA.Width;
                             drawingContext.DrawText(fA, new Point(xPoint, yPoint));
-                            nextYLocation = imageSource.Height + (filecroppingVM.DPIY * paddingYInch);
+                            nextYLocation += imageSource.Height + innerMarginVertical;
                             break;
                         case 1:
                             FormattedText fB = new FormattedText(filecroppingVM.PatternName + " - B", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
                             xPoint -= fB.Width;
                             drawingContext.DrawText(fB, new Point(xPoint, yPoint));
-                            nextXLocation = imageSource.Width + (filecroppingVM.DPIX * paddingXInch / 1.5);
+                            nextXLocation += imageSource.Width + innerMarginHorizontal;
                             break;
                         case 2:
                             FormattedText fc = new FormattedText(filecroppingVM.PatternName + " - C", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
                             xPoint -= fc.Width;
                             drawingContext.DrawText(fc, new Point(xPoint, yPoint));
-                            nextXLocation -= imageSource.Width + (filecroppingVM.DPIX * paddingXInch / 1.5); //// reset so next frame goes below 2nd image
-                            nextYLocation += imageSource.Height + (filecroppingVM.DPIY * paddingYInch);
+                            nextXLocation -= imageSource.Width + innerMarginHorizontal; //// reset so next frame goes below 2nd image
+                            nextYLocation += imageSource.Height + innerMarginVertical;
                             break;
                         case 3:
                             FormattedText fD = new FormattedText(filecroppingVM.PatternName + " - D", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
                             xPoint -= fD.Width;
                             drawingContext.DrawText(fD, new Point(xPoint, yPoint));
-                            nextXLocation += imageSource.Width + (filecroppingVM.DPIX * paddingXInch / 1.5);
+                            nextXLocation += imageSource.Width + innerMarginHorizontal;
                             break;
                         case 4:
                             FormattedText fE = new FormattedText(filecroppingVM.PatternName + " - E", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);

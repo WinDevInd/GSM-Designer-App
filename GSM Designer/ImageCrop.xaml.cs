@@ -56,6 +56,8 @@ namespace GSM_Designer
         {
             outputWindow.Close();
             outputWindow = null;
+            fileCroppingVM = null;
+            FileCroppingVM.Instance.Dispose();
             base.NavigateAway();
         }
 

@@ -32,7 +32,7 @@ namespace GSM_Designer.ViewModel
     {
         private static double DefaultWidth = 18.5;
         private static double DefaultHeight = 16.5;
-        private static string defaultFileName = "GSM DESIGN 1";
+        private static string defaultPatternName = "GSM DESIGN 1";
         private double currentWidth = 0;
         private double currentHeight = 0;
         private static FileCroppingVM _Instance;
@@ -42,6 +42,9 @@ namespace GSM_Designer.ViewModel
         private FileCroppingVM()
         {
             Directory.CreateDirectory(PathPrefix);
+            this.Width = DefaultWidth;
+            this.Height = DefaultHeight;
+            this.PatternName = defaultPatternName;
         }
         static FileCroppingVM()
         {
@@ -80,14 +83,14 @@ namespace GSM_Designer.ViewModel
             this.controller = controller;
         }
 
-        private string _PatternName = defaultFileName;
+        private string _PatternName;
         public string PatternName
         {
             get { return _PatternName; }
             set { SetFieldAndNotify(ref _PatternName, value); }
         }
 
-        private double _Width = 18.5;
+        private double _Width;
         public double Width
         {
             get { return _Width; }
@@ -101,7 +104,7 @@ namespace GSM_Designer.ViewModel
             }
         }
 
-        private double _Height = 16;
+        private double _Height;
         public double Height
         {
             get { return _Height; }
@@ -118,14 +121,14 @@ namespace GSM_Designer.ViewModel
         public double DPIX { get; set; }
         public double DPIY { get; set; }
 
-        private double _CroppedHeight = 4;
+        private double _CroppedHeight;
         public double CroppedHeight
         {
             get { return _CroppedHeight; }
             set { SetFieldAndNotify(ref _CroppedHeight, value); }
         }
 
-        private double _CroppedWidth = 9;
+        private double _CroppedWidth;
         public double CroppedWidth
         {
             get { return _CroppedWidth; }
@@ -209,6 +212,11 @@ namespace GSM_Designer.ViewModel
             }
             IsLoading = false;
             GC.Collect();
+        }
+
+        public void Dispose()
+        {
+            _Instance = null;
         }
 
         private async Task<BitmapFrame> ProcessImage(string file, double requiredWidth, double requiredHeight, int index, bool isPrimary)
