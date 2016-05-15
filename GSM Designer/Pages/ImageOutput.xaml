@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GSM_Designer.Pages"
         mc:Ignorable="d"
-        Title="ImageLayput" Height="250" Width="400"
+        Title="ImageLayput" MinHeight="250" MinWidth="400"
         WindowStyle="None">
     <Viewbox>
         <Grid>

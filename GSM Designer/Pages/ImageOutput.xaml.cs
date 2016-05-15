@@ -36,13 +36,15 @@ namespace GSM_Designer.Pages
                 this.Show();
         }
 
-        public void UpdateOutputLayout(string patternName)
+        public async Task UpdateOutputLayout(string patternName)
         {
             AlternateText.Visibility = Visibility.Visible;
-            this.BringIntoView();
+            OutputImageView.Visibility = Visibility.Collapsed;
+            this.Activate();
             //// do stuffs here
             MakeLayout();
             AlternateText.Visibility = Visibility.Collapsed;
+            OutputImageView.Visibility = Visibility.Visible;
 
         }
 
@@ -136,6 +138,14 @@ namespace GSM_Designer.Pages
                 bitmapEncoder = null;
                 renderTargetBitmap = null;
             }
+            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output.jpg"))
+            {
+                var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                var decodedImage = decoder.Frames[0];
+                decoder = null;
+                this.OutputImageView.Source = decodedImage;
+            }
+
         }
 
     }

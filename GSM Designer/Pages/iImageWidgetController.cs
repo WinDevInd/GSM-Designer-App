@@ -1,4 +1,6 @@
-﻿namespace GSM_Designer.Pages
+﻿using System.Threading.Tasks;
+
+namespace GSM_Designer.Pages
 {
     public interface iImageWidgetController
     {
@@ -9,7 +11,7 @@
 
     public interface iLayoutUpdater
     {
-        void UpdateOutputLayout(string patternName);
+        Task UpdateOutputLayout(string patternName);
         void ShowWindow();
     }
 }
