@@ -12,7 +12,7 @@ namespace TPL
         private int tempCounter, taskThreshold, currentExecCounter;
         private bool isOnHold;
 
-        private InstanceQManager<object> AccessObjGenerator = new InstanceQManager<object>(1, true);
+        private InstanceQM<object> AccessObjGenerator = new InstanceQM<object>(1, true);
 
         private Queue<Action> HighPriorityTasks = new Queue<Action>();
         private Queue<Action> LowPriorityTasks = new Queue<Action>();
@@ -92,33 +92,25 @@ namespace TPL
             TaskParams<T> executionParams = new TaskParams<T>(executionQuery.taskPriority)
             {
                 shouldRunOnUIThread = executionQuery.shouldRunOnUIThread,
-                forceCancelResponseIfExecuting = executionQuery.forceCancelResponseIfExecuting,
-                suppressCancellationExceptions = executionQuery.suppressCancellationExceptions
+                forceCancelResponseIfExecuting = executionQuery.forceCancelResponseIfExecuting
             };
             executionQuery.AddCancelOperation(executionParams);
             executionParams.TaskParamsInitialize(TaskReference, tcs);
             executionParams.TaskCompleted += (o, e) =>
             {
-
                 tcs.SetResult(e.OperationResult);
                 lock (obj)
                 {
-                    if (executionParams.taskPriority != Priority.Immediate)
-                    {
-                        currentExecCounter--;
-                        ProcessLoop();
-                    }
+                    currentExecCounter--;
+                    ProcessLoop();
                 }
             };
             executionParams.TaskFailed += (o, e) =>
             {
                 lock (obj)
                 {
-                    if (executionParams.taskPriority != Priority.Immediate)
-                    {
-                        currentExecCounter--;
-                        ProcessLoop();
-                    }
+                    currentExecCounter--;
+                    ProcessLoop();
                 }
             };
 
@@ -129,11 +121,9 @@ namespace TPL
                     case Priority.High:
                         HighPriorityTasks.Enqueue(executionParams.ProcessExecutionQueryAsync);
                         break;
-
                     case Priority.Immediate:
                         executionParams.ProcessExecutionQueryAsync();
-                        return tcs.Task; //RETURNED BEFORE
-
+                        break;
                     case Priority.Low:
                         LowPriorityTasks.Enqueue(executionParams.ProcessExecutionQueryAsync);
                         break;

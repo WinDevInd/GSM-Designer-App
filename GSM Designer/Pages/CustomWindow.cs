@@ -73,7 +73,7 @@ namespace GSM_Designer.Pages
             //// this windows is hidden now
         }
 
-        protected virtual void NavigatedBack(object payload)
+        public virtual void NavigatedBack(object payload)
         {
             //// back navigation
         }
@@ -91,5 +91,6 @@ namespace GSM_Designer.Pages
             }
 
         }
+
     }
 }

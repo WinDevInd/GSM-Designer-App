@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,47 +8,40 @@ namespace TPL
 {
     public class ConcurrentTaskManager<T>
     {
-        ConcurrentDictionary<string, InstanceQManager<T>> RedundantTaskThrottler = new ConcurrentDictionary<string, InstanceQManager<T>>();
+
+        Dictionary<string, InstanceQM<T>> RedundantTaskThrottler = new Dictionary<string, InstanceQM<T>>();
 
         public async Task<T> SendOperationKeyAndWaitForAccessAsync(string operationKey)
         {
-            bool isNewInstance = false;
-            var throttler = RedundantTaskThrottler.AddOrUpdate(operationKey, (key) => { return null; }, (key, oldValue) =>
-             {
-                 if (oldValue == null)
-                 {
-                     isNewInstance = true;
-                     return new InstanceQManager<T>(1, true);
-                 }
-                 else
-                     return oldValue;
-             });
-
-            if (throttler != null)
+            if (!RedundantTaskThrottler.ContainsKey(operationKey))
             {
-                if (isNewInstance)
+                RedundantTaskThrottler.Add(operationKey, null);
+            }
+            else
+            {
+                var throttler = RedundantTaskThrottler[operationKey];
+                if (throttler == null)
                 {
+                    throttler = RedundantTaskThrottler[operationKey] = new InstanceQM<T>(1, true);
                     await throttler.GetFreeInstanceAsync();
                 }
                 var obj = await throttler.GetFreeInstanceAsync();
                 throttler.ReleaseInstance(obj);
                 return obj;
             }
-            else
-                return default(T);
+            return default(T);
         }
 
         public void ReleaseOperation(string operationKey, T operationResult)
         {
-            InstanceQManager<T> throttler = null;
-            var isSuccess = RedundantTaskThrottler.TryGetValue(operationKey, out throttler);
-            if (isSuccess)
+            if (RedundantTaskThrottler.ContainsKey(operationKey))
             {
+                var throttler = RedundantTaskThrottler[operationKey];
                 if (throttler != null)
                 {
                     throttler.ReleaseInstance(operationResult);
                 }
-                RedundantTaskThrottler.TryRemove(operationKey, out throttler);
+                RedundantTaskThrottler.Remove(operationKey);
             }
         }
     }

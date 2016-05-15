@@ -6,27 +6,18 @@ using System.Threading.Tasks;
 
 namespace TPL
 {
-    public class InstanceQManager<T>
+    public class InstanceQM<T>
     {
         private Queue<T> ClientStack = new Queue<T>();
         private Queue<TaskCompletionSource<T>> requestQueue = new Queue<TaskCompletionSource<T>>();
         private object lockVal = new object();
         bool reuseInstances;
 
-        public InstanceQManager(int instanceCount, bool reuseInstances)
+        public InstanceQM(int instanceCount, bool reuseInstances)
         {
             this.reuseInstances = reuseInstances;
             for (int i = 0; i < instanceCount; i++)
                 ClientStack.Enqueue(Activator.CreateInstance<T>());
-        }
-
-        public int GetQueueSize()
-        {
-            lock(lockVal)
-            {
-                var count = requestQueue.Count;
-                return count;
-            }
         }
 
         public void ReleaseInstance(T client)

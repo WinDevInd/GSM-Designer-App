@@ -75,6 +75,9 @@
     <Compile Include="Pages\ImageCropping.xaml.cs">
       <DependentUpon>ImageCropping.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ImageOutput.xaml.cs">
+      <DependentUpon>ImageOutput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PatternName.xaml.cs">
       <DependentUpon>PatternName.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ImageCropping.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ImageOutput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,4 +6,10 @@
         void Reset();
         void UpdateUI(bool isProcessing);
     }
+
+    public interface iLayoutUpdater
+    {
+        void UpdateOutputLayout(string patternName);
+        void ShowWindow();
+    }
 }
