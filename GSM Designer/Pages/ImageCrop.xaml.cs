@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GSM_Designer
+namespace GSM_Designer.Pages
 {
     /// <summary>
     /// Interaction logic for ImageCrop.xaml

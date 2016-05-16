@@ -59,22 +59,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CanvasSizeDialog.xaml.cs">
-      <DependentUpon>CanvasSizeDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SizeControl.xaml.cs">
       <DependentUpon>SizeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImageCrop.xaml.cs">
+    <Compile Include="Pages\ImageCrop.xaml.cs">
       <DependentUpon>ImageCrop.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CustomWindow.cs" />
     <Compile Include="Pages\iImageWidgetController.cs" />
     <Compile Include="Pages\iCustomnavigation.cs" />
     <Compile Include="AppNavigationService\NavigationService.cs" />
-    <Compile Include="Pages\ImageCropping.xaml.cs">
-      <DependentUpon>ImageCropping.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\ImageOutput.xaml.cs">
       <DependentUpon>ImageOutput.xaml</DependentUpon>
     </Compile>
@@ -87,19 +81,11 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\FIleCroppingVM.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
-    <Page Include="CanvasSizeDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\SizeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ImageCrop.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ImageCropping.xaml">
+    <Page Include="Pages\ImageCrop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
