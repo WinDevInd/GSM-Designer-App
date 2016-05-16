@@ -33,6 +33,7 @@ namespace GSM_Designer.ViewModel
         public string Format { get; set; }
         public string Extension { get; set; }
     }
+
     public class FileCroppingVM : BaseViewModel
     {
         private static double DefaultWidth = 18.5;
@@ -58,15 +59,14 @@ namespace GSM_Designer.ViewModel
             SelectedFormat = ImageFormatList[0];
         }
 
-        static FileCroppingVM()
-        {
-            _Instance = new FileCroppingVM();
-        }
-
         public static FileCroppingVM Instance
         {
             get
             {
+                if (_Instance == null)
+                {
+                    _Instance = new FileCroppingVM();
+                }
                 return _Instance;
             }
         }
@@ -255,7 +255,20 @@ namespace GSM_Designer.ViewModel
 
         public void Dispose()
         {
-            _Instance = null;
+            try
+            {
+                App.TaskQueue.ExecuteTaskAsync(() =>
+                {
+                    foreach (var file in Directory.GetFiles(PathPrefix))
+                    {
+                        File.Delete(file);
+                    }
+                }, new TPL.TaskParams(TPL.Priority.Medium));
+            }
+            catch
+            {
+
+            }
         }
 
         private async Task<BitmapFrame> ProcessImage(string file, double requiredWidth, double requiredHeight, int index, bool isPrimary)

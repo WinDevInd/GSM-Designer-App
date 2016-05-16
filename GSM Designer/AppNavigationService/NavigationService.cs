@@ -55,6 +55,7 @@ namespace GSM_Designer.AppNavigationService
             var pageType = NavigationStack.Pop();
             if (NavigationStack.Any())
             {
+
                 if (!NavigationStack.Contains(pageType))
                 {
                     windowsCache.Remove(pageType);

@@ -59,6 +59,7 @@ namespace GSM_Designer
             fileCroppingVM = null;
             FileCroppingVM.Instance.Dispose();
             base.NavigateAway();
+
         }
 
         private void InitializeVM()

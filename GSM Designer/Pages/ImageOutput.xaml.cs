@@ -51,13 +51,14 @@ namespace GSM_Designer.Pages
 
         protected override void OnClosed(EventArgs e)
         {
+            this.Close();
             //base.OnClosed(e);
         }
 
         private void MakeLayout()
         {
-            var innerMarginHorizontal = 50; //Math.Max(50, (filecroppingVM.DPIX * 0.2));
-            var innerMarginVertical = Math.Max(50, (filecroppingVM.DPIY * 0.2));
+            var innerMarginHorizontal = 50;// Math.Min(30, (filecroppingVM.DPIX * 0.2));
+            var innerMarginVertical = Math.Min(40, (filecroppingVM.DPIY * 0.2));
             double horizontalPadding = innerMarginHorizontal / 2;
             double verticalPadding = innerMarginVertical / 2;
 
@@ -139,7 +140,7 @@ namespace GSM_Designer.Pages
                 bitmapEncoder = null;
                 renderTargetBitmap = null;
             }
-            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output.jpg"))
+            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
             {
                 var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
                 var decodedImage = decoder.Frames[0];

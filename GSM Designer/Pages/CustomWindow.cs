@@ -60,6 +60,7 @@ namespace GSM_Designer.Pages
             {
                 GC.Collect();
                 CustomNavigationService.GetNavigationService().GoBack(this);
+                NavigateAway();
             }
         }
 
@@ -71,6 +72,7 @@ namespace GSM_Designer.Pages
         public virtual void NavigateAway()
         {
             //// this windows is hidden now
+            
         }
 
         public virtual void NavigatedBack(object payload)
