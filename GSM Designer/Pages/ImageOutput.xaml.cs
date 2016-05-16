@@ -53,6 +53,7 @@ namespace GSM_Designer.Pages
         {
             //base.OnClosed(e);
         }
+
         private void MakeLayout()
         {
             var innerMarginHorizontal = 50; //Math.Max(50, (filecroppingVM.DPIX * 0.2));
@@ -79,7 +80,7 @@ namespace GSM_Designer.Pages
                 {
                     var imageSource = new BitmapImage();
                     imageSource.BeginInit();
-                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + "collage" + i + ".jpg", UriKind.RelativeOrAbsolute);
+                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + "collage" + i + filecroppingVM.SelectedFormat.Extension, UriKind.RelativeOrAbsolute);
                     imageSource.EndInit();
                     horizontalIncrement = imageSource.Width;
                     verticalIncrement = imageSource.Height;
@@ -132,7 +133,7 @@ namespace GSM_Designer.Pages
 
             var bitmapEncoder = new JpegBitmapEncoder();
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output.jpg"))
+            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
             {
                 bitmapEncoder.Save(stream);
                 bitmapEncoder = null;

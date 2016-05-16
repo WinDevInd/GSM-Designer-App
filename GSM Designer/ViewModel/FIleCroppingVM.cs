@@ -28,6 +28,11 @@ namespace GSM_Designer.ViewModel
         public object DecodedImage { get; set; }
     }
 
+    public class ImageFormat
+    {
+        public string Format { get; set; }
+        public string Extension { get; set; }
+    }
     public class FileCroppingVM : BaseViewModel
     {
         private static double DefaultWidth = 18.5;
@@ -35,6 +40,7 @@ namespace GSM_Designer.ViewModel
         private static string defaultPatternName = "GSM DESIGN 1";
         private double currentWidth = 0;
         private double currentHeight = 0;
+        private string currentFormat = "";
         private static FileCroppingVM _Instance;
         public static string PathPrefix = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GSM Temp\\";
         private iImageWidgetController controller;
@@ -45,7 +51,13 @@ namespace GSM_Designer.ViewModel
             this.Width = DefaultWidth;
             this.Height = DefaultHeight;
             this.PatternName = defaultPatternName;
+            var imageFormatList = new List<ImageFormat>();
+            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.JPEGIMAGEEXTENSION, Format = ImageHelper.JPEGIMAGEFORMAT });
+            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.TIFFIMAGEEXTENSION, Format = ImageHelper.TIFFIAMGEFORMAT });
+            ImageFormatList = imageFormatList;
+            SelectedFormat = ImageFormatList[0];
         }
+
         static FileCroppingVM()
         {
             _Instance = new FileCroppingVM();
@@ -59,8 +71,33 @@ namespace GSM_Designer.ViewModel
             }
         }
 
-        private bool _IsLoading;
+        private List<ImageFormat> _ImageFormatList;
+        public List<ImageFormat> ImageFormatList
+        {
+            get
+            {
+                return _ImageFormatList;
+            }
+            set
+            {
+                SetFieldAndNotify(ref _ImageFormatList, value);
+            }
+        }
 
+        private ImageFormat _SelectedFormat;
+        public ImageFormat SelectedFormat
+        {
+            get
+            {
+                return _SelectedFormat;
+            }
+            set
+            {
+                SetFieldAndNotify(ref _SelectedFormat, value);
+            }
+        }
+
+        private bool _IsLoading;
         public bool IsLoading
         {
             get { return _IsLoading; }
@@ -152,17 +189,19 @@ namespace GSM_Designer.ViewModel
                 this.Images.Add(data);
                 i++;
             }
+
             ApplySize();
         }
 
         public async Task ApplySize(bool reset = false)
         {
             //// if no change in new and old size do not process
-            if (currentWidth == Width && currentHeight == Height)
+            if (currentWidth == Width && currentHeight == Height && currentFormat == SelectedFormat.Format)
                 return;
 
             currentHeight = Height;
             currentWidth = Width;
+            currentFormat = SelectedFormat.Extension;
             IsLoading = true;
             if (Images == null || !Images.Any())
                 return;
@@ -199,8 +238,8 @@ namespace GSM_Designer.ViewModel
             {
                 var image = await App.TaskQueue.ExecuteTaskAsync(() =>
                 {
-                    var srcFile = PathPrefix + index + ".jpg";
-                    var croppedFile = PathPrefix + "collage" + index + ".jpg";
+                    var srcFile = PathPrefix + index + SelectedFormat.Extension;
+                    var croppedFile = PathPrefix + "collage" + index + SelectedFormat.Extension;
                     var croppedImage = CropImage(srcFile, croppedFile, x, y);
                     return croppedImage;
                 }, new TPL.TaskParams(TPL.Priority.Medium));
@@ -232,8 +271,18 @@ namespace GSM_Designer.ViewModel
                 DPIX = bitmapImage.DpiX;
                 DPIY = bitmapImage.DpiY;
             }
-            var fileName = isPrimary ? PathPrefix + "collage" + index + ".jpg" : PathPrefix + index + ".jpg";
-            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName);
+            string extension = "";
+            switch (SelectedFormat.Format)
+            {
+                case ImageHelper.TIFFIAMGEFORMAT:
+                    extension = ImageHelper.TIFFIMAGEEXTENSION;
+                    break;
+                default:
+                    extension = ImageHelper.JPEGIMAGEEXTENSION;
+                    break;
+            }
+            var fileName = isPrimary ? PathPrefix + "collage" + index + extension : PathPrefix + index + extension;
+            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName, SelectedFormat.Format);
             bitmapImage = null;
             resizedImage = null;
             BitmapDecoder decoder = null;
@@ -252,7 +301,6 @@ namespace GSM_Designer.ViewModel
 
         private async Task<BitmapFrame> CropImage(string sourceFileName, string destinationFileName, double x, double y)
         {
-
             if (File.Exists(sourceFileName))
             {
                 var imageSource = new BitmapImage();
@@ -261,7 +309,8 @@ namespace GSM_Designer.ViewModel
                 imageSource.EndInit();
                 var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(CroppedWidth * DPIX, CroppedHeight * DPIY),
                     new System.Windows.Point(x, y));
-                var bitmapEncoder = new JpegBitmapEncoder();
+
+                var bitmapEncoder = ImageHelper.GetEncoder(SelectedFormat.Format);
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(imageToSave));
                 var finalImage = new BitmapImage();
                 using (Stream stream = File.Create(destinationFileName))

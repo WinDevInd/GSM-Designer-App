@@ -14,6 +14,12 @@ namespace GSM_Designer.Utils
     {
         public static double dpiConst = 96; //// defaultDpiConstant
 
+        public const string JPEGIMAGEFORMAT = "JPG";
+        public const string JPEGIMAGEEXTENSION = ".jpg";
+        public const string TIFFIAMGEFORMAT = "TIFF";
+        public const string TIFFIMAGEEXTENSION = ".tif";
+
+
         public static BitmapImage GetResizedBitmapImage(BitmapImage source, Size size)
         {
             try
@@ -40,14 +46,14 @@ namespace GSM_Designer.Utils
             return null;
         }
 
-        public static async Task<bool> SaveResizedBitmapImage(BitmapImage source, Size size, string desitnationPath = "file.jpg")
+        public static async Task<bool> SaveResizedBitmapImage(BitmapImage source, Size size, string desitnationPath = "file", string formatType = JPEGIMAGEFORMAT)
         {
             bool isTaskSuccess = false;
             try
             {
                 if (!string.IsNullOrWhiteSpace(desitnationPath) && size != null && source != null)
                 {
-                    var bitmapEncoder = new JpegBitmapEncoder();
+                    BitmapEncoder bitmapEncoder = GetEncoder(formatType);
                     var targetBitmap = ProcessImageRepeeatXY(source, size);
                     bitmapEncoder.Frames.Add(BitmapFrame.Create(targetBitmap));
                     using (Stream stream = File.Create(desitnationPath))
@@ -99,6 +105,17 @@ namespace GSM_Designer.Utils
             renderTargetBitmap.Render(drawingVisual);
             drawingVisual = null;
             return renderTargetBitmap;
+        }
+
+        public static BitmapEncoder GetEncoder(string formatType)
+        {
+            switch (formatType)
+            {
+                case TIFFIAMGEFORMAT:
+                    return new TiffBitmapEncoder();
+                default:
+                    return new JpegBitmapEncoder();
+            }
         }
     }
 }
