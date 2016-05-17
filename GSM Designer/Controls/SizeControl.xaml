@@ -8,7 +8,7 @@
              x:Name="SizeWidget"
              d:DesignHeight="70" d:DesignWidth="300">
 
-    <Grid Background="White">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="4"/>

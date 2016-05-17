@@ -33,20 +33,6 @@ namespace GSM_Designer.Pages
             outputWindow = new ImageOutput();
         }
 
-        protected override void OnStateChanged(EventArgs obj)
-        {
-            if (this.WindowState == WindowState.Maximized)
-            {
-                outputWindow.WindowState = WindowState.Normal;
-            }
-            else
-            {
-                outputWindow.WindowState = this.WindowState;
-            }
-
-            base.OnStateChanged(obj);
-        }
-
         protected override void Navigate(object payload, bool isBacknav = false)
         {
             InitializeVM();
@@ -170,7 +156,11 @@ namespace GSM_Designer.Pages
             ProgressBar.IsIndeterminate = true;
             await FileCroppingVM.Instance.CombinePattern();
             await Task.Delay(200);
-            MakeLayout();
+            if (outputWindow.IsClosed)
+            {
+                outputWindow.Show();
+            }
+            outputWindow.UpdateOutputLayout();
             ProgressBar.IsIndeterminate = false;
             UpdateUI(false);
         }
@@ -196,9 +186,7 @@ namespace GSM_Designer.Pages
 
         private void MakeLayout()
         {
-            iLayoutUpdater layoutUpdater = outputWindow as iLayoutUpdater;
-            layoutUpdater.ShowWindow();
-            layoutUpdater.UpdateOutputLayout("Jay.jpg");
+
         }
 
     }

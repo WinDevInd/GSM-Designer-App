@@ -18,6 +18,8 @@ namespace GSM_Designer.Utils
         public const string JPEGIMAGEEXTENSION = ".jpg";
         public const string TIFFIAMGEFORMAT = "TIFF";
         public const string TIFFIMAGEEXTENSION = ".tif";
+        public const string ImageFileFilter = "Image Files |*.jpg;*.tif";
+        public const string ImageFileFilterExtended = ImageFileFilter + ";.png;*.jpeg";
 
 
         public static BitmapImage GetResizedBitmapImage(BitmapImage source, Size size)

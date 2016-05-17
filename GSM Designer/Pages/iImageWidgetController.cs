@@ -9,9 +9,4 @@ namespace GSM_Designer.Pages
         void UpdateUI(bool isProcessing);
     }
 
-    public interface iLayoutUpdater
-    {
-        Task UpdateOutputLayout(string patternName);
-        void ShowWindow();
-    }
 }

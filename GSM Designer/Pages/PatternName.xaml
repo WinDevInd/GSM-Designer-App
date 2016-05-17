@@ -8,7 +8,8 @@
                    xmlns:local="clr-namespace:GSM_Designer.Pages"
                    mc:Ignorable="d"
                    Title="Enter Pattern Name" Height="480" Width="300" 
-                   WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+                   Background="#f1f1f1"
+                   WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <StackPanel Margin="8">
         <Label Content="Enter Pattern Name" Margin="16,0" Padding="0,4" />
@@ -28,7 +29,7 @@
             <Controls:SizeControl TextChanged="SizeControl_PreviewTextChanged" Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
 
             <Label Content="Secondary Canvases Crop box size" Grid.Row="2" Margin="0,4"/>
-            <Grid Background="White" Grid.Row="3" >
+            <Grid Grid.Row="3" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="4"/>
@@ -40,13 +41,13 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Widht :" Grid.Row="0"/>
+                <Label Content="Width :" Grid.Row="0"/>
                 <TextBlock  Text="{Binding CroppedWidth}" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-                <Label Content="Inches"  Grid.Row="0" Grid.Column="4"/>
+                <Label Content="Inches(approx.)"  Grid.Row="0" Grid.Column="4"/>
 
                 <Label Content="Height :" Grid.Row="2"/>
                 <TextBlock Text="{Binding CroppedHeight}" VerticalAlignment="Center" Foreground="#212121" Grid.Column="1" Grid.Row="2"/>
-                <Label Content="Inches" Grid.Row="2" Grid.Column="2"/>
+                <Label Content="Inches(approx.)" Grid.Row="2" Grid.Column="2"/>
 
             </Grid>
         </Grid>

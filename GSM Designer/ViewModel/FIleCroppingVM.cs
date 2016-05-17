@@ -147,7 +147,7 @@ namespace GSM_Designer.ViewModel
                 if (_Width != value)
                 {
                     _Width = value;
-                    CroppedWidth = (_Width / 2);
+                    CroppedWidth = _Width / 2;
                 }
             }
         }

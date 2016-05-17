@@ -12,7 +12,8 @@ namespace GSM_Designer.AppNavigationService
     {
         SelectFile,
         PatternName,
-        ImageCropping
+        ImageCropping,
+        ImageOutput
     }
 
     public enum WindowsType
@@ -42,6 +43,8 @@ namespace GSM_Designer.AppNavigationService
                     return typeof(SelectFileWindow);
                 case PageType.ImageCropping:
                     return typeof(ImageCrop);
+                case PageType.ImageOutput:
+                    return typeof(ImageOutput);
             }
             return null;
         }
@@ -56,27 +59,24 @@ namespace GSM_Designer.AppNavigationService
 
         Dictionary<PageType, CustomWindow> windowsCache = new Dictionary<PageType, CustomWindow>();
 
-        Stack<PageType> NavigationStack = new Stack<PageType>();
+        Stack<NavigationParam> NavigationStack = new Stack<NavigationParam>();
 
 
         public void GoBack(CustomWindow currentWindow, object navigationPayload = null)
         {
-            var pageType = NavigationStack.Pop();
+            var lastPage = NavigationStack.Pop();
             if (NavigationStack.Any())
             {
 
-                if (!NavigationStack.Contains(pageType))
+                if (!NavigationStack.Contains(lastPage))
                 {
-                    windowsCache.Remove(pageType);
+                    windowsCache.Remove(lastPage.PageType);
                 }
                 var topItemOnStack = NavigationStack.Peek();
-                var navParam = new NavigationParam()
-                {
-                    NavigationPayload = navigationPayload,
-                    PageType = topItemOnStack,
-                    WindowType = WindowsType.WindowPage
-                };
-                Navigate(currentWindow, navParam);
+                var navParam = topItemOnStack;
+                currentWindow.Close();
+                currentWindow = null;
+                Navigate(currentWindow, navParam,true);
                 //NaviagetToPage(true, topItemOnStack, currentWindow, navigationPayload);
             }
             else
@@ -86,15 +86,13 @@ namespace GSM_Designer.AppNavigationService
             }
         }
 
-        public void Navigate(CustomWindow currentWindow, NavigationParam navigationParam)
+        public void Navigate(CustomWindow currentWindow, NavigationParam navigationParam, bool isbacknav = false)
         {
             switch (navigationParam.WindowType)
             {
                 case WindowsType.WindowPage:
-                    NaviagetToPage(currentWindow, navigationParam);
-                    break;
                 case WindowsType.DialogPage:
-                    NaviagetToPageDialog(currentWindow, navigationParam);
+                    NaviagetToPage(currentWindow, navigationParam,isbacknav);
                     break;
                 case WindowsType.Dialog:
                     OpenDialog(navigationParam);
@@ -119,22 +117,32 @@ namespace GSM_Designer.AppNavigationService
                 var type = GetPage(pageType);
                 var newWindow = (CustomWindow)Activator.CreateInstance(type);
                 currentWindow.Hide();
-                (newWindow as iCustomNavigationService).ShowWindow(navigationParam.NavigationPayload,false,true);
+                (newWindow as iCustomNavigationService).ShowWindow(navigationParam.NavigationPayload, false, true);
             }
         }
 
-        private void NaviagetToPage(CustomWindow currentWindow, NavigationParam navigationParam)
+        private void NaviagetToPage(CustomWindow currentWindow, NavigationParam navigationParam,bool isbacknav = false)
         {
             var pageType = navigationParam.PageType;
             var type = GetPage(pageType);
+            CustomWindow window = null;
             if (!windowsCache.ContainsKey(pageType))
             {
-                var newWindow = (CustomWindow)Activator.CreateInstance(type);
-                windowsCache[pageType] = newWindow;
-                NavigationStack.Push(pageType);
+                window = (CustomWindow)Activator.CreateInstance(type);
+                if (!navigationParam.RemoveOnAway)
+                {
+                    windowsCache[pageType] = window;
+                    NavigationStack.Push(navigationParam);
+                }
             }
-            var window = windowsCache[pageType];
-            currentWindow?.Hide();
+            else
+            {
+                window = windowsCache[pageType];
+            }
+            if (isbacknav)
+                currentWindow?.Close();
+            else
+                currentWindow?.Hide();
             (window as iCustomNavigationService)?.ShowWindow(navigationParam.NavigationPayload);
         }
 

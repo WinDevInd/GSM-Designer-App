@@ -5,16 +5,23 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:GSM_Designer.Pages"
-                   mc:Ignorable="d"
-                   Title="ImageLayput" 
-                   Background="WhiteSmoke"
-                   Height="550" Width="350"
-                   WindowStyle="None">
-    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
+                   mc:Ignorable="d" 
+                   Height="800" Width="480"
+                   WindowStyle="ThreeDBorderWindow" 
+                   WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid HorizontalAlignment="Stretch" Background="#f1f1f1" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
                        Text="Please wait! Final desing is under Processing..."/>
-            <Image x:Name="OutputImageView" Stretch="Uniform"/>
-        </Grid>
-    </Viewbox>
+        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
+            <Image x:Name="OutputImageView" Stretch="None"/>
+        </Viewbox>
+        <Button Content="Save Image" Grid.Row="1" HorizontalAlignment="Center" Click="SaveButton_Click"/>
+    </Grid>
+
 </base:CustomWindow>

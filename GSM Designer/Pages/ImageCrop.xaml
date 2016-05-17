@@ -6,6 +6,7 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:GSM_Designer.Pages"
                    mc:Ignorable="d"
+                   Background="#f1f1f1"
                    MouseMove="path_MouseMove"
                    MouseLeftButtonUp="path_MouseLeftButtonUp"
                    Title="ImageCrop">

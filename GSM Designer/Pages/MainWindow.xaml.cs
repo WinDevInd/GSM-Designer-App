@@ -42,7 +42,9 @@ namespace GSM_Designer
         {
             var fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Multiselect = true;
-            fileDialog.Filter = "Image Files |*.jpeg;*.png;*.jpg;*.gif,;*.tif";
+            //fileDialog.Filter = "Image Files |*.jpeg;*.png;*.jpg;*.gif,;*.tif";
+
+            fileDialog.Filter = ImageHelper.ImageFileFilterExtended;
 
             Nullable<bool> result = fileDialog.ShowDialog();
             if (result == true)
@@ -220,23 +222,5 @@ namespace GSM_Designer
         }
 
         #endregion
-        //public void SetImage(Image image)
-        //{
-
-        //    DrawingVisual drawingVisual = new DrawingVisual();
-        //    using (DrawingContext drawingContext = drawingVisual.RenderOpen())
-        //    {
-        //        for (int x = 0; x <= image.ActualWidth - ((System.Windows.Media.Imaging.BitmapFrame)image.Source).PixelWidth; x += (int)image.Width)
-        //        {
-        //            drawingContext.DrawImage(image.Source, new Rect(0, 0, x, image.Height));
-        //        }
-        //    }
-
-        //    RenderTargetBitmap bmp = new RenderTargetBitmap((int)image.Source.Width, (int)image.Height, 600, 600, PixelFormats.Pbgra32);
-        //    bmp.Render(drawingVisual);
-        //    Test.Source = bmp;
-        //}
-        //}
-
     }
 }

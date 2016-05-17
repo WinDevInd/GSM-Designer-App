@@ -27,22 +27,10 @@ namespace GSM_Designer.Pages
             }
             else
             {
-                Intialize();
+                fileCroppingVM = FileCroppingVM.Instance;
             }
             this.DataContext = fileCroppingVM;
-            var file = InfoViewModel.Instance.Files[0].FilePath;
-            var bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(file, UriKind.RelativeOrAbsolute);
-            bitmapImage.EndInit();
-            fileCroppingVM.DPIX = bitmapImage.DpiX;
-            fileCroppingVM.DPIY = bitmapImage.DpiY;
             base.Navigate(payload, isBackNav);
-        }
-
-        private void Intialize()
-        {
-            fileCroppingVM = FileCroppingVM.Instance;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,7 +55,6 @@ namespace GSM_Designer.Pages
                 }
                 fileCroppingVM.ApplySize(true);
                 this.Close();
-
             }
         }
 
