@@ -1,4 +1,5 @@
-﻿using GSM_Designer.Pages;
+﻿using GSM_Designer.AppNavigationService;
+using GSM_Designer.Pages;
 using GSM_Designer.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,13 @@ namespace GSM_Designer.Pages
             base.OnStateChanged(obj);
         }
 
-        public override void Navigated(object payload)
+        protected override void Navigate(object payload, bool isBacknav = false)
         {
             InitializeVM();
             base.Navigated(payload);
         }
 
-        public override void NavigateAway()
+        protected override void NavigateAway()
         {
             outputWindow.Close();
             outputWindow = null;
@@ -83,7 +84,9 @@ namespace GSM_Designer.Pages
                     this.ImageContainer.Height = height;
                     this.ImageContainer.Width = width;
                     CompletArea.Rect = new Rect(0, 0, width, height);
-                    InteractionArea.Rect = new Rect(0, 0, fileCroppingVM.CroppedWidth * source.DpiX, fileCroppingVM.CroppedHeight * source.DpiY);
+                    var croppedWidth = fileCroppingVM.GetCropWidthInPx();
+                    var croppedHeight = fileCroppingVM.GetCropHeightInPx();
+                    InteractionArea.Rect = new Rect(0, 0, croppedWidth, croppedHeight);
                     break;
                 case 1:
                     this.BCrop.Source = imageSource;
@@ -102,8 +105,16 @@ namespace GSM_Designer.Pages
 
         private void SizeButton_Click(object sender, RoutedEventArgs e)
         {
-            PatternNameWindow c = new PatternNameWindow(this.DataContext);
-            c.ShowDialog();
+            //PatternNameWindow c = new PatternNameWindow(this.DataContext);
+            NavigationParam navParam = new NavigationParam()
+            {
+                PageType = PageType.PatternName,
+                WindowType = WindowsType.Dialog,
+                NavigationPayload = this.DataContext,
+                RemoveOnAway = true
+            };
+            CustomNavigationService.GetNavigationService().Navigate(this, navParam);
+            //c.ShowDialog();
             this.ProgressBar.Maximum = 4;
         }
 
@@ -153,9 +164,15 @@ namespace GSM_Designer.Pages
             fileCroppingVM.CropSelectedAreaInSecondaryImages(InteractionArea.Rect.X, InteractionArea.Rect.Y);
         }
 
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
+            UpdateUI(true);
+            ProgressBar.IsIndeterminate = true;
+            await FileCroppingVM.Instance.CombinePattern();
+            await Task.Delay(200);
             MakeLayout();
+            ProgressBar.IsIndeterminate = false;
+            UpdateUI(false);
         }
 
         public void UpdateUI(bool isProcessing)

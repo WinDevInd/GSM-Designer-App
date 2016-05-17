@@ -1,18 +1,20 @@
 ﻿<base:CustomWindow x:Class="GSM_Designer.Pages.ImageOutput"
-         xmlns:base="clr-namespace:GSM_Designer.Pages"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GSM_Designer.Pages"
-        mc:Ignorable="d"
-        Title="ImageLayput" MinHeight="250" MinWidth="400"
-        WindowStyle="None">
-    <Viewbox>
-        <Grid>
-            <TextBlock x:Name="AlternateText" 
-                       Text="Please wait! Finel desing is under Processing..."/>
-            <Image x:Name="OutputImageView"/>
+                   xmlns:base="clr-namespace:GSM_Designer.Pages"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:local="clr-namespace:GSM_Designer.Pages"
+                   mc:Ignorable="d"
+                   Title="ImageLayput" 
+                   Background="WhiteSmoke"
+                   Height="550" Width="350"
+                   WindowStyle="None">
+    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
+                       Text="Please wait! Final desing is under Processing..."/>
+            <Image x:Name="OutputImageView" Stretch="Uniform"/>
         </Grid>
     </Viewbox>
 </base:CustomWindow>

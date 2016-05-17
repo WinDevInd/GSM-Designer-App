@@ -16,7 +16,14 @@ namespace GSM_Designer
         {
             TaskQueue = new TPL.TPL(3);
             UIDispatcher = this.Dispatcher;
-            CustomNavigationService.GetNavigationService().Navigate(PageType.SelectFile, null);
+            NavigationParam navParam = new NavigationParam()
+            {
+                PageType = PageType.SelectFile,
+                WindowType = WindowsType.WindowPage,
+                RemoveOnAway = false
+            };
+            CustomNavigationService.GetNavigationService().Navigate(null, navParam);
+            //new Window1().Show();
         }
     }
 }

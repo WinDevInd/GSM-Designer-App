@@ -42,7 +42,14 @@ namespace GSM_Designer.Pages
             OutputImageView.Visibility = Visibility.Collapsed;
             this.Activate();
             //// do stuffs here
-            MakeLayout();
+            //MakeLayout();
+            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
+            {
+                var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                var decodedImage = decoder.Frames[0];
+                decoder = null;
+                this.OutputImageView.Source = decodedImage;
+            }
             AlternateText.Visibility = Visibility.Collapsed;
             OutputImageView.Visibility = Visibility.Visible;
 
@@ -55,27 +62,29 @@ namespace GSM_Designer.Pages
             //base.OnClosed(e);
         }
 
+
+        //// Not using
         private void MakeLayout()
         {
-            var innerMarginHorizontal = 50;// Math.Min(30, (filecroppingVM.DPIX * 0.2));
-            var innerMarginVertical = Math.Min(40, (filecroppingVM.DPIY * 0.2));
-            double horizontalPadding = innerMarginHorizontal / 2;
-            double verticalPadding = innerMarginVertical / 2;
+            var innerMarginHorizontal = filecroppingVM.ImageMargin;
+            var innerMarginVertical = filecroppingVM.ImageMargin;
+            double horizontalPadding = innerMarginHorizontal / 4;
+            double verticalPadding = innerMarginVertical;
 
             DrawingVisual drawingVisual = new DrawingVisual();
 
             double horizontalIncrement = 0;
             double verticalIncrement = 0;
 
-            var canvasWidth = (filecroppingVM.Width * filecroppingVM.DPIX) + (innerMarginHorizontal * (filecroppingVM.DPIX / ImageHelper.dpiConst));
+            var canvasWidth = (filecroppingVM.Width * filecroppingVM.DPIX) + ((innerMarginHorizontal / 2) * (filecroppingVM.DPIX / ImageHelper.dpiConst));
             var canvasHeight = ((filecroppingVM.Height + (filecroppingVM.CroppedHeight * 2))
                 //// 3 margins - top 0.5, bottom 0.5, 1 between image
-                * filecroppingVM.DPIY) + ((innerMarginVertical * (filecroppingVM.DPIY / ImageHelper.dpiConst) * 3.5));
-
+                * filecroppingVM.DPIY) + ((innerMarginVertical * (filecroppingVM.DPIY / ImageHelper.dpiConst) * 4));
+            double fontSize = Math.Min(15, canvasWidth / 100);
             using (DrawingContext drawingContext = drawingVisual.RenderOpen())
             {
                 drawingContext.DrawRectangle(new SolidColorBrush(Colors.White), null, new Rect(0, 0, canvasWidth, canvasHeight));
-                Typeface patternTypeFace = new Typeface(new FontFamily("Segoe UI)").ToString());
+                Typeface patternTypeFace = new Typeface(new FontFamily(new Uri("pack://application:,,,/"), "/Fonts/#Myriad Pro"), FontStyles.Normal, FontWeights.Regular, FontStretches.Normal);
                 var culture = CultureInfo.GetCultureInfo("en-In");
                 for (int i = 0; i < 5; i++)
                 {
@@ -87,37 +96,37 @@ namespace GSM_Designer.Pages
                     verticalIncrement = imageSource.Height;
                     double nextYLocation = 0;
                     double nextXLocation = 0;
-                    var xPoint = nextXLocation + imageSource.Width + horizontalPadding;
-                    var yPoint = nextYLocation + verticalIncrement + verticalPadding + 10;
+                    var xPoint = nextXLocation + imageSource.Width + horizontalPadding - innerMarginHorizontal;
+                    var yPoint = nextYLocation + verticalIncrement + verticalPadding + (innerMarginVertical / 10);
                     switch (i)
                     {
                         case 0:
-                            FormattedText fA = new FormattedText(filecroppingVM.PatternName + " - A", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
+                            FormattedText fA = new FormattedText(filecroppingVM.PatternName + " - A", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPoint -= fA.Width;
                             drawingContext.DrawText(fA, new Point(xPoint, yPoint));
                             nextYLocation += imageSource.Height + innerMarginVertical;
                             break;
                         case 1:
-                            FormattedText fB = new FormattedText(filecroppingVM.PatternName + " - B", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
+                            FormattedText fB = new FormattedText(filecroppingVM.PatternName + " - B", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPoint -= fB.Width;
                             drawingContext.DrawText(fB, new Point(xPoint, yPoint));
-                            nextXLocation += imageSource.Width + innerMarginHorizontal;
+                            nextXLocation += imageSource.Width + (innerMarginHorizontal);
                             break;
                         case 2:
-                            FormattedText fc = new FormattedText(filecroppingVM.PatternName + " - C", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
+                            FormattedText fc = new FormattedText(filecroppingVM.PatternName + " - C", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPoint -= fc.Width;
                             drawingContext.DrawText(fc, new Point(xPoint, yPoint));
-                            nextXLocation -= imageSource.Width + innerMarginHorizontal; //// reset so next frame goes below 2nd image
+                            nextXLocation -= imageSource.Width + (innerMarginHorizontal); //// reset so next frame goes below 2nd image
                             nextYLocation += imageSource.Height + innerMarginVertical;
                             break;
                         case 3:
-                            FormattedText fD = new FormattedText(filecroppingVM.PatternName + " - D", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
+                            FormattedText fD = new FormattedText(filecroppingVM.PatternName + " - D", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPoint -= fD.Width;
                             drawingContext.DrawText(fD, new Point(xPoint, yPoint));
-                            nextXLocation += imageSource.Width + innerMarginHorizontal;
+                            nextXLocation += imageSource.Width + (innerMarginHorizontal);
                             break;
                         case 4:
-                            FormattedText fE = new FormattedText(filecroppingVM.PatternName + " - E", culture, FlowDirection.LeftToRight, patternTypeFace, 24, Brushes.Black);
+                            FormattedText fE = new FormattedText(filecroppingVM.PatternName + " - E", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPoint -= fE.Width;
                             drawingContext.DrawText(fE, new Point(xPoint, yPoint));
                             break;
@@ -132,7 +141,7 @@ namespace GSM_Designer.Pages
             renderTargetBitmap.Render(drawingVisual);
             drawingVisual = null;
 
-            var bitmapEncoder = new JpegBitmapEncoder();
+            var bitmapEncoder = ImageHelper.GetEncoder(filecroppingVM.SelectedFormat.Format);
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
             {
@@ -140,14 +149,7 @@ namespace GSM_Designer.Pages
                 bitmapEncoder = null;
                 renderTargetBitmap = null;
             }
-            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
-            {
-                var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-                var decodedImage = decoder.Frames[0];
-                decoder = null;
-                this.OutputImageView.Source = decodedImage;
-            }
-
+           
         }
 
     }

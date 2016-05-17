@@ -11,7 +11,13 @@ namespace GSM_Designer.Pages
     public class CustomWindow : Window, iCustomNavigationService
     {
         private object navigationPayLaod = null;
-        public bool IsDialog { get; private set; }
+
+        public bool IsDialog
+        {
+            get;
+            private set;
+        }
+
         private void Init()
         {
             this.Effect = new System.Windows.Media.Effects.DropShadowEffect()
@@ -40,8 +46,9 @@ namespace GSM_Designer.Pages
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        public void ShowWindow(object payload, bool isBacknav = false)
+        public void ShowWindow(object payload, bool isBacknav = false,bool isDilogPage = false)
         {
+            IsDialog = isDilogPage;
             Show();
             if (isBacknav)
             {
@@ -49,8 +56,15 @@ namespace GSM_Designer.Pages
             }
             else
             {
-                Navigated(payload);
+                Navigate(payload);
             }
+        }
+
+        public void ShowDialog(object payload)
+        {
+            IsDialog = true;
+            Navigate(payload);
+            ShowDialog();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -60,39 +74,32 @@ namespace GSM_Designer.Pages
             {
                 GC.Collect();
                 CustomNavigationService.GetNavigationService().GoBack(this);
-                NavigateAway();
             }
+            NavigateAway();
+            IsDialog = false;
         }
 
-        public virtual void Navigated(object payload)
+        protected virtual void Navigated(object payload)
         {
             //// Forward Navigation
         }
 
-        public virtual void NavigateAway()
+        protected virtual void NavigateAway()
         {
             //// this windows is hidden now
-            
+
         }
 
-        public virtual void NavigatedBack(object payload)
+        protected virtual void NavigatedBack(object payload)
         {
             //// back navigation
         }
 
-        public void Navigate(object payload, bool isBacknav = false)
+        protected virtual void Navigate(object payload, bool isBacknav = false)
         {
-            Show();
-            if (isBacknav)
-            {
-                NavigatedBack(payload);
-            }
-            else
-            {
-                Navigated(payload);
-            }
-
+            //// navigate forward
         }
 
+       
     }
 }

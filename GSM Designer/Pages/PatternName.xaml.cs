@@ -1,6 +1,8 @@
 ﻿using GSM_Designer.AppNavigationService;
 using GSM_Designer.ViewModel;
+using System;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace GSM_Designer.Pages
 {
@@ -14,20 +16,33 @@ namespace GSM_Designer.Pages
 
         public PatternNameWindow()
         {
-            Intialize();
+            InitializeComponent();
         }
 
-        public PatternNameWindow(object dataContext) : base(true)
+        protected override void Navigate(object payload, bool isBackNav = false)
         {
-            Intialize();
-            isDialog = true;
+            if (payload != null)
+            {
+                fileCroppingVM = payload as FileCroppingVM;
+            }
+            else
+            {
+                Intialize();
+            }
+            this.DataContext = fileCroppingVM;
+            var file = InfoViewModel.Instance.Files[0].FilePath;
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(file, UriKind.RelativeOrAbsolute);
+            bitmapImage.EndInit();
+            fileCroppingVM.DPIX = bitmapImage.DpiX;
+            fileCroppingVM.DPIY = bitmapImage.DpiY;
+            base.Navigate(payload, isBackNav);
         }
 
         private void Intialize()
         {
-            InitializeComponent();
             fileCroppingVM = FileCroppingVM.Instance;
-            this.DataContext = fileCroppingVM;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -41,7 +56,13 @@ namespace GSM_Designer.Pages
             {
                 if (!isDialog)
                 {
-                    CustomNavigationService.GetNavigationService().Navigate(PageType.ImageCropping, this);
+                    NavigationParam navParam = new NavigationParam()
+                    {
+                        PageType = PageType.ImageCropping,
+                        WindowType = WindowsType.WindowPage,
+                        RemoveOnAway = false
+                    };
+                    CustomNavigationService.GetNavigationService().Navigate(this, navParam);
                     return;
                 }
                 fileCroppingVM.ApplySize(true);
