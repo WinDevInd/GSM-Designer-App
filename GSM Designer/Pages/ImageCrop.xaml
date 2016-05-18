@@ -9,7 +9,7 @@
                    Background="#f1f1f1"
                    MouseMove="path_MouseMove"
                    MouseLeftButtonUp="path_MouseLeftButtonUp"
-                   Title="ImageCrop">
+                   Title="Image Crop">
 
     <base:CustomWindow.Resources>
         <Style TargetType="Image">
@@ -69,10 +69,10 @@
         <TextBlock x:Name="InfoTextBlockRight" Text="Cropped Pattern will appear here" Grid.Column="2" Grid.Row="2"  
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
-        <Image x:Name="BCrop" Grid.Row="0" Margin="8,0,0,8" Grid.Column="2"/>
-        <Image x:Name="CCrop" Grid.Row="1" Margin="8,8,0,0" Grid.Column="2"/>
+        <Image x:Name="BCrop" Grid.Row="0" Margin="8,0,8,0" Grid.Column="2"/>
+        <Image x:Name="CCrop" Grid.Row="1" Margin="8,8,8,0" Grid.Column="2"/>
         <Image x:Name="DCrop" Grid.Row="2" Margin="8,8,8,0" Grid.Column="2"/>
-        <Image x:Name="ECrop" Grid.Row="3" Margin="8,8,0,0" Grid.Column="2"/>
+        <Image x:Name="ECrop" Grid.Row="3" Margin="8,8,8,0" Grid.Column="2"/>
 
         <Button x:Name="SizeButton" Content="Size" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"  Margin="0,16,244,0" Click="SizeButton_Click" />
         <Button x:Name="ApplyButton" Content="Apply" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"  Click="ApplyButton_Click" IsEnabled="False" />

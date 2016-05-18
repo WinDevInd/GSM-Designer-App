@@ -26,9 +26,9 @@ namespace GSM_Designer
             catch { }
             NavigationParam navParam = new NavigationParam()
             {
-                PageType = PageType.SelectFile,
-                WindowType = WindowsType.WindowPage,
-                RemoveOnAway = false
+                PageType = PageType.Splash,
+                WindowType = WindowsType.DialogPage,
+                RemoveOnAway = true
             };
             CustomNavigationService.GetNavigationService().Navigate(null, navParam);
             //new Window1().Show();

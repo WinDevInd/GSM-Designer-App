@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GSM_Designer"
         mc:Ignorable="d"
-        Title="Select Files" 
+        Title="Select Images" 
         x:Name="MainWindow"
         Height="500" Width="600" 
         WindowStartupLocation="CenterScreen" 
@@ -56,9 +56,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="openFilesButton" Content="Select Files" Click="SelectFile_BtnClick"
+        <Button x:Name="openFilesButton" Content="Select Images" Click="SelectFile_BtnClick"
                 Grid.Row="0" Grid.Column="0"/>
-        <Button x:Name="AddMoreFileButton" Content="Add Files" 
+        <Button x:Name="AddMoreFileButton" Content="Add Images" 
                 Grid.Row="1" Grid.Column="0" Click="AddMoreFileButton_Click"/>
         <Button x:Name="NextButton" Content="Next" IsEnabled="{Binding CanGoNextScreen,FallbackValue='false'}" 
                 HorizontalAlignment="Right" VerticalAlignment="Top"
@@ -70,6 +70,7 @@
                   PreviewMouseMove="ListViewPreviewMouseMove"
                   PreviewMouseLeftButtonDown="ListViewMouseLeftButtonDown"
                   ItemTemplate="{StaticResource FileListStyle}"/>
+        <TextBlock Text="Add exactly 5 Images" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Margin="16,0" Grid.Column="2" Grid.Row="3"/>
     </Grid>
 </base:CustomWindow>
 

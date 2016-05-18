@@ -14,7 +14,7 @@
     <StackPanel Margin="8">
         <Label Content="Pattern Name" Margin="4,0" Padding="0,4" />
         <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
-                 TextChanged="TextBox_TextChanged" Text="{Binding PatternName,Mode=TwoWay}"
+                 TextChanged="TextBox_TextChanged" MaxLength="50" Text="{Binding PatternName,Mode=TwoWay}"
                  HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="250" VerticalAlignment="Stretch"/>
 
 
@@ -28,7 +28,7 @@
             <Label Content="Primary Canvas Dimensions" Margin="0,4"/>
             <Controls:SizeControl TextChanged="SizeControl_PreviewTextChanged" Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
 
-            <Label Content="Secondary Canvases Crop box size" Grid.Row="2" Margin="0,4"/>
+            <Label Content="Secondary canvases crop box size" Grid.Row="2" Margin="0,4"/>
             <Grid Grid.Row="3" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>

@@ -1,4 +1,5 @@
 ﻿using GSM_Designer.AppNavigationService;
+using GSM_Designer.Utils;
 using GSM_Designer.ViewModel;
 using System;
 using System.Windows.Controls;
@@ -63,17 +64,21 @@ namespace GSM_Designer.Pages
         private void SizeControl_PreviewTextChanged(object sender, TextChangedEventArgs e)
         {
             var text = (sender as TextBox).Text;
-            NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(text) && text != "0";
-            if (!string.IsNullOrWhiteSpace(text))
+            NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(text) && (text != "0" || text != "0.");
+            if (!string.IsNullOrWhiteSpace(text.Trim()))
             {
-                switch (e.Source.ToString())
+                var data = TextHelper.TextToPositiveDouble(text);
+                if (!string.IsNullOrWhiteSpace(text))
                 {
-                    case "Width":
-                        fileCroppingVM.Width = double.Parse(text);
-                        break;
-                    case "Height":
-                        fileCroppingVM.Height = double.Parse(text);
-                        break;
+                    switch (e.Source.ToString())
+                    {
+                        case "Width":
+                            fileCroppingVM.Width = double.Parse(text);
+                            break;
+                        case "Height":
+                            fileCroppingVM.Height = double.Parse(text);
+                            break;
+                    }
                 }
             }
         }

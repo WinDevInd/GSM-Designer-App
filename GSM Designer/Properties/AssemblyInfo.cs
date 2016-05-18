@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("GSM Designer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("ArcheSoft")]
 [assembly: AssemblyProduct("GSM Designer")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]

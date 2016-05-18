@@ -10,6 +10,7 @@ namespace GSM_Designer.AppNavigationService
 {
     public enum PageType
     {
+        Splash,
         SelectFile,
         PatternName,
         ImageCropping,
@@ -37,6 +38,8 @@ namespace GSM_Designer.AppNavigationService
         {
             switch (type)
             {
+                case PageType.Splash:
+                    return typeof(Splash);
                 case PageType.PatternName:
                     return typeof(PatternNameWindow);
                 case PageType.SelectFile:

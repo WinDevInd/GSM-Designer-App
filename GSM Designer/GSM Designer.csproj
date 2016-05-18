@@ -75,8 +75,12 @@
     <Compile Include="Pages\PatternName.xaml.cs">
       <DependentUpon>PatternName.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\DragAdorner.cs" />
     <Compile Include="Utils\ImageHelper.cs" />
+    <Compile Include="Utils\TextHelper.cs" />
     <Compile Include="Utils\UIHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\FIleCroppingVM.cs" />
@@ -106,6 +110,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\PatternName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Splash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

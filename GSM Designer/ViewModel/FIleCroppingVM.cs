@@ -135,7 +135,7 @@ namespace GSM_Designer.ViewModel
         public string PatternName
         {
             get { return _PatternName; }
-            set { SetFieldAndNotify(ref _PatternName, value); }
+            set { SetFieldAndNotify(ref _PatternName, value.Trim()); }
         }
 
         private double _Width;

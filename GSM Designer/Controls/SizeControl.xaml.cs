@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GSM_Designer.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,10 @@ namespace GSM_Designer.Controls
         public SizeControl()
         {
             InitializeComponent();
+            DataObject.AddPastingHandler(WidthBox, OnPaste);
+            DataObject.AddPastingHandler(HeightBox, OnPaste);
         }
+
         public event EventHandler<TextChangedEventArgs> TextChanged;
 
         public double CanvasWidth
@@ -58,10 +62,23 @@ namespace GSM_Designer.Controls
             }
             else
             {
-                
+
             }
         }
 
+        private void OnPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            var isText = e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true);
+            if (!isText) return;
+
+            var text = e.SourceDataObject.GetData(DataFormats.UnicodeText) as string;
+            text = TextHelper.TextToPositiveDouble(text);
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                (sender as TextBox).Text = text.ToString();
+            }
+            e.CancelCommand();
+        }
 
         private void TextBox_TextChanged_Route(object sender, TextChangedEventArgs e)
         {
