@@ -56,7 +56,7 @@ namespace GSM_Designer.Pages
                     return;
                 }
                 fileCroppingVM.ApplySize(true);
-                this.Close();
+                this.CloseWindow(false);
             }
         }
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GSM_Designer.Pages
 {
@@ -36,6 +37,7 @@ namespace GSM_Designer.Pages
             };
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.KeyDown += CustomWindow_KeyDown;
+            this.Icon = App.Icon;
         }
 
         private void CustomWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -56,6 +58,7 @@ namespace GSM_Designer.Pages
         {
             Init();
             this.IsDialog = isDialog;
+            CanExit = false;
         }
 
         public CustomWindow()

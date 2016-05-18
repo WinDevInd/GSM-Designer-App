@@ -21,7 +21,7 @@
         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
             <Image x:Name="OutputImageView" Stretch="None"/>
         </Viewbox>
-        <Button Content="Save Image" Grid.Row="1" HorizontalAlignment="Center" Click="SaveButton_Click"/>
+        <Button x:Name="SaveButton" Content="Save Image" Grid.Row="1" HorizontalAlignment="Center" Click="SaveButton_Click"/>
     </Grid>
 
 </base:CustomWindow>

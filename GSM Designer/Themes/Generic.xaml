@@ -27,6 +27,7 @@
     <Style TargetType="TextBlock">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="Foreground" Value="#212121"/>
     </Style>
 
     <Style TargetType="TextBox">

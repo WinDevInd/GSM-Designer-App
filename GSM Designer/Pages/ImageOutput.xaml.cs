@@ -29,6 +29,7 @@ namespace GSM_Designer.Pages
         {
             InitializeComponent();
             filecroppingVM = FileCroppingVM.Instance;
+            this.Title = filecroppingVM.PatternName;
             this.KeyDown += ImageOutput_KeyDown;
         }
 
@@ -45,7 +46,7 @@ namespace GSM_Designer.Pages
         protected override void Navigate(object payload, bool isBacknav = false)
         {
             IsClosed = false;
-            base.Navigate(payload,isBacknav);
+            base.Navigate(payload, isBacknav);
         }
 
         protected override void NavigateAway()
@@ -58,6 +59,8 @@ namespace GSM_Designer.Pages
             AlternateText.Visibility = Visibility.Visible;
             OutputImageView.Visibility = Visibility.Collapsed;
             this.Activate();
+            SaveButton.IsEnabled = false;
+            await FileCroppingVM.Instance.CombinePattern();
             using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
             {
                 var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
@@ -65,6 +68,7 @@ namespace GSM_Designer.Pages
                 decoder = null;
                 this.OutputImageView.Source = decodedImage;
             }
+            SaveButton.IsEnabled = true;
             AlternateText.Visibility = Visibility.Collapsed;
             OutputImageView.Visibility = Visibility.Visible;
 
@@ -78,14 +82,16 @@ namespace GSM_Designer.Pages
         private void SaveFile()
         {
             Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-            saveFileDialog.FileName = "output";
+            saveFileDialog.FileName = "output" + filecroppingVM.SelectedFormat.Extension;
             saveFileDialog.Filter = ImageHelper.ImageFileFilter;
             if (saveFileDialog.ShowDialog() == true)
             {
                 string fileName = saveFileDialog.FileName;
                 var bitmapEncoder = ImageHelper.GetEncoder(filecroppingVM.SelectedFormat.Format);
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(this.OutputImageView.Source as BitmapSource));
-                using (Stream stream = File.Create(fileName + filecroppingVM.SelectedFormat.Extension))
+                var saveFileName = fileName.EndsWith(filecroppingVM.SelectedFormat.Extension) ? fileName :
+                    fileName + filecroppingVM.SelectedFormat.Extension;
+                using (Stream stream = File.Create(saveFileName))
                 {
                     bitmapEncoder.Save(stream);
                     bitmapEncoder = null;

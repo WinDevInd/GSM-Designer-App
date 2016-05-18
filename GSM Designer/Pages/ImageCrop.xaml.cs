@@ -73,6 +73,7 @@ namespace GSM_Designer.Pages
                     var croppedWidth = fileCroppingVM.GetCropWidthInPx();
                     var croppedHeight = fileCroppingVM.GetCropHeightInPx();
                     InteractionArea.Rect = new Rect(0, 0, croppedWidth, croppedHeight);
+                    InfoTextBlockLeft.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     this.BCrop.Source = imageSource;
@@ -85,6 +86,11 @@ namespace GSM_Designer.Pages
                     break;
                 case 4:
                     this.ECrop.Source = imageSource;
+                    if (imageSource != null)
+                    {
+                        ApplyButton.IsEnabled = true;
+                        InfoTextBlockRight.Visibility = Visibility.Collapsed;
+                    }
                     break;
             }
         }
@@ -153,15 +159,12 @@ namespace GSM_Designer.Pages
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateUI(true);
-            ProgressBar.IsIndeterminate = true;
-            await FileCroppingVM.Instance.CombinePattern();
-            await Task.Delay(200);
             if (outputWindow.IsClosed)
             {
+                outputWindow = new ImageOutput();
                 outputWindow.Show();
             }
             outputWindow.UpdateOutputLayout();
-            ProgressBar.IsIndeterminate = false;
             UpdateUI(false);
         }
 
@@ -169,12 +172,13 @@ namespace GSM_Designer.Pages
         {
             OpacityRect.Visibility = isProcessing ? Visibility.Visible : Visibility.Collapsed;
             ProgressBar.Visibility = isProcessing ? Visibility.Visible : Visibility.Collapsed;
-            CropButton.IsEnabled = ApplyButton.IsEnabled = SizeButton.IsEnabled = !isProcessing;
+            CropButton.IsEnabled = SizeButton.IsEnabled = !isProcessing;
             ProgressBar.Value = 0;
         }
 
         public void Reset()
         {
+            ApplyButton.IsEnabled = false;
             this.ProgressBar.Value = 0;
             this.CompletArea.Rect = new Rect(0, 0, 0, 0);
             this.ImageContainer.Source = null;
@@ -182,12 +186,8 @@ namespace GSM_Designer.Pages
             this.CCrop.Source = null;
             this.DCrop.Source = null;
             this.ECrop.Source = null;
+            InfoTextBlockLeft.Visibility = Visibility.Visible;
+            InfoTextBlockRight.Visibility = Visibility.Visible;
         }
-
-        private void MakeLayout()
-        {
-
-        }
-
     }
 }

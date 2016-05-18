@@ -7,12 +7,12 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:GSM_Designer.Pages"
                    mc:Ignorable="d"
-                   Title="Enter Pattern Name" Height="480" Width="300" 
+                   Title="Pattern Info" Height="480" Width="300" 
                    Background="#f1f1f1"
                    WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <StackPanel Margin="8">
-        <Label Content="Enter Pattern Name" Margin="16,0" Padding="0,4" />
+        <Label Content="Pattern Name" Margin="4,0" Padding="0,4" />
         <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
                  TextChanged="TextBox_TextChanged" Text="{Binding PatternName,Mode=TwoWay}"
                  HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="250" VerticalAlignment="Stretch"/>
@@ -61,6 +61,5 @@
         <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 
                 Click="NextButton_Click" />
     </StackPanel>
-
-
+    
 </base:CustomWindow>
