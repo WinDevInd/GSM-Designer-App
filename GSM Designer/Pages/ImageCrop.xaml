@@ -19,7 +19,7 @@
         </Style>
     </base:CustomWindow.Resources>
 
-    <Grid Margin="8">
+    <Grid Margin="8,4">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -33,7 +33,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Viewbox  Grid.RowSpan="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Viewbox  Grid.RowSpan="5" Grid.Column="0" Margin="0,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Grid>
                 <Image x:Name="ImageContainer" Margin="0"/>
                 <Path Stroke="#212121" Fill="#000000" Opacity=".5" 
@@ -69,10 +69,10 @@
         <TextBlock x:Name="InfoTextBlockRight" Text="Cropped Pattern will appear here" Grid.Column="2" Grid.Row="2"  
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
-        <Image x:Name="BCrop" Grid.Row="0" Margin="8,0,8,0" Grid.Column="2"/>
-        <Image x:Name="CCrop" Grid.Row="1" Margin="8,8,8,0" Grid.Column="2"/>
-        <Image x:Name="DCrop" Grid.Row="2" Margin="8,8,8,0" Grid.Column="2"/>
-        <Image x:Name="ECrop" Grid.Row="3" Margin="8,8,8,0" Grid.Column="2"/>
+        <Image x:Name="BCrop" Grid.Row="0" Margin="8,4,0,4" Grid.Column="2"/>
+        <Image x:Name="CCrop" Grid.Row="1" Margin="8,4,0,4" Grid.Column="2"/>
+        <Image x:Name="DCrop" Grid.Row="2" Margin="8,4,0,4" Grid.Column="2"/>
+        <Image x:Name="ECrop" Grid.Row="3" Margin="8,4,0,4" Grid.Column="2"/>
 
         <Button x:Name="SizeButton" Content="Size" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"  Margin="0,16,244,0" Click="SizeButton_Click" />
         <Button x:Name="ApplyButton" Content="Apply" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"  Click="ApplyButton_Click" IsEnabled="False" />

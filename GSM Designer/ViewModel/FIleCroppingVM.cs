@@ -129,7 +129,7 @@ namespace GSM_Designer.ViewModel
             this.controller = controller;
         }
 
-        public double ImageMargin { get; set; } = 15;
+        public double ImageMargin { get; set; } = 12;
 
         private string _PatternName;
         public string PatternName

@@ -25,7 +25,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Primary Canvas Dimensions" Margin="0,4"/>
+            <Label Content="Primary canvas dimensions" Margin="0,4"/>
             <Controls:SizeControl TextChanged="SizeControl_PreviewTextChanged" Grid.Row="1" CanvasWidth="{Binding Width,Mode=TwoWay}" CanvasHeight="{Binding Height,Mode=TwoWay}"/>
 
             <Label Content="Secondary canvases crop box size" Grid.Row="2" Margin="0,4"/>
