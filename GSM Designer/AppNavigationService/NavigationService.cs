@@ -76,7 +76,7 @@ namespace GSM_Designer.AppNavigationService
                 var navParam = topItemOnStack;
                 currentWindow.Close();
                 currentWindow = null;
-                Navigate(currentWindow, navParam,true);
+                Navigate(currentWindow, navParam, true);
                 //NaviagetToPage(true, topItemOnStack, currentWindow, navigationPayload);
             }
             else
@@ -92,7 +92,7 @@ namespace GSM_Designer.AppNavigationService
             {
                 case WindowsType.WindowPage:
                 case WindowsType.DialogPage:
-                    NaviagetToPage(currentWindow, navigationParam,isbacknav);
+                    NaviagetToPage(currentWindow, navigationParam, isbacknav);
                     break;
                 case WindowsType.Dialog:
                     OpenDialog(navigationParam);
@@ -121,7 +121,7 @@ namespace GSM_Designer.AppNavigationService
             }
         }
 
-        private void NaviagetToPage(CustomWindow currentWindow, NavigationParam navigationParam,bool isbacknav = false)
+        private void NaviagetToPage(CustomWindow currentWindow, NavigationParam navigationParam, bool isbacknav = false)
         {
             var pageType = navigationParam.PageType;
             var type = GetPage(pageType);
@@ -140,7 +140,7 @@ namespace GSM_Designer.AppNavigationService
                 window = windowsCache[pageType];
             }
             if (isbacknav)
-                currentWindow?.Close();
+                currentWindow?.CloseWindow(NavigationStack.Any());
             else
                 currentWindow?.Hide();
             (window as iCustomNavigationService)?.ShowWindow(navigationParam.NavigationPayload);

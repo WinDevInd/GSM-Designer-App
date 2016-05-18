@@ -24,7 +24,7 @@ namespace GSM_Designer.Pages
         {
             get;
             set;
-        }
+        } = true;
 
         private void Init()
         {
@@ -42,12 +42,13 @@ namespace GSM_Designer.Pages
         {
             if (e.Key == Key.Escape)
             {
+                CanExit = false;
                 if (!this.IsDialog)
                 {
                     this.GoBack();
                     return;
                 }
-                this.CloseWindow();
+                this.CloseWindow(false);
             }
         }
 
@@ -106,12 +107,11 @@ namespace GSM_Designer.Pages
 
         protected override void OnClosed(EventArgs e)
         {
-
-            base.OnClosed(e);
             if (CanExit)
             {
                 Application.Current.Shutdown(0);
             }
+            //base.OnClosed(e);
         }
 
         protected virtual void Navigated(object payload)
