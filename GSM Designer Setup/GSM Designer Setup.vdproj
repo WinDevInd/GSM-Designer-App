@@ -388,12 +388,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_73EC85632E2A6ADC587DB8D6ECC21143"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2C6139F4A7474D1AB6144669176B0487"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -697,6 +691,12 @@
         "OwnerKey" = "8:_20A4BAEC5ACFC5F181FAB0DDF95CBEFB"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_73EC85632E2A6ADC587DB8D6ECC21143"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -747,6 +747,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -2484,15 +2492,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GSM Designer"
-        "ProductCode" = "8:{D6800C6F-63E8-4822-B988-D14C4297A37A}"
-        "PackageCode" = "8:{D21A7C6A-0CAA-4EE8-B252-5D43BE52C45F}"
+        "ProductCode" = "8:{B613087A-A190-4EB2-AF69-987D169B01EE}"
+        "PackageCode" = "8:{F74A4EF6-C5C6-4B55-9694-CB7DF6E7B5B0}"
         "UpgradeCode" = "8:{6DD7D56B-716C-4D97-97AF-AA6B29C82FD2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.0.1"
+        "ProductVersion" = "8:0.0.2"
         "Manufacturer" = "8:ArcheSoft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -3020,7 +3028,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2C6139F4A7474D1AB6144669176B0487"
             {
-            "SourcePath" = "8:..\\GSM Designer\\obj\\Debug\\GSM Designer.exe"
+            "SourcePath" = "8:..\\GSM Designer\\obj\\Release\\GSM Designer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4FE74CF3F7664C268312AF6EFF6AC05E"

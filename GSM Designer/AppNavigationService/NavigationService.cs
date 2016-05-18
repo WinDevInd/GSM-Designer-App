@@ -74,9 +74,8 @@ namespace GSM_Designer.AppNavigationService
                 }
                 var topItemOnStack = NavigationStack.Peek();
                 var navParam = topItemOnStack;
-                currentWindow.Close();
-                currentWindow = null;
                 Navigate(currentWindow, navParam, true);
+
                 //NaviagetToPage(true, topItemOnStack, currentWindow, navigationPayload);
             }
             else
@@ -126,24 +125,35 @@ namespace GSM_Designer.AppNavigationService
             var pageType = navigationParam.PageType;
             var type = GetPage(pageType);
             CustomWindow window = null;
+            if (NavigationStack.Any() && !isbacknav)
+            {
+                var lastPage = NavigationStack?.Peek();
+                if (lastPage?.WindowType == WindowsType.DialogPage)
+                {
+                    NavigationStack.Pop();
+                }
+            }
             if (!windowsCache.ContainsKey(pageType))
             {
                 window = (CustomWindow)Activator.CreateInstance(type);
-                if (!navigationParam.RemoveOnAway)
-                {
-                    windowsCache[pageType] = window;
-                    NavigationStack.Push(navigationParam);
-                }
+                windowsCache[pageType] = window;
+                NavigationStack.Push(navigationParam);
             }
             else
             {
                 window = windowsCache[pageType];
             }
             if (isbacknav)
-                currentWindow?.CloseWindow(NavigationStack.Any());
+            {
+                currentWindow?.CloseWindow(!NavigationStack.Any());
+                currentWindow = null;
+            }
             else
+            {
                 currentWindow?.Hide();
-            (window as iCustomNavigationService)?.ShowWindow(navigationParam.NavigationPayload);
+            }
+
+            (window as iCustomNavigationService)?.ShowWindow(navigationParam.NavigationPayload, isbacknav);
         }
 
     }

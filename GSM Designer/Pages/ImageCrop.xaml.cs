@@ -41,7 +41,7 @@ namespace GSM_Designer.Pages
 
         protected override void NavigateAway()
         {
-            outputWindow.Close();
+            outputWindow.CloseWindow(false);
             outputWindow = null;
             fileCroppingVM = null;
             FileCroppingVM.Instance.Dispose();

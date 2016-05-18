@@ -23,10 +23,12 @@ namespace GSM_Designer.Pages
         {
             if (payload != null)
             {
+                isDialog = true;
                 fileCroppingVM = payload as FileCroppingVM;
             }
             else
             {
+                isDialog = false;
                 fileCroppingVM = FileCroppingVM.Instance;
             }
             this.DataContext = fileCroppingVM;
