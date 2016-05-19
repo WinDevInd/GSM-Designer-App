@@ -1,4 +1,4 @@
-﻿<base:CustomWindow x:Class="GSM_Designer.Pages.PatternNameWindow"
+﻿<base:CustomWindow x:Class="GSM_Designer.Pages.PatternInfoWindow"
                    xmlns:Controls="clr-namespace:GSM_Designer.Controls"
                    xmlns:base="clr-namespace:GSM_Designer.Pages"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,11 +13,17 @@
 
     <StackPanel Margin="8">
         <Label Content="Pattern Name" Margin="4,0" Padding="0,4" />
-        <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PatternName" Margin="4" Padding="4,3,4,4" FontSize="14"
                  TextChanged="TextBox_TextChanged" MaxLength="50" Text="{Binding PatternName,Mode=TwoWay}"
-                 HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="250" VerticalAlignment="Stretch"/>
-
-
+                 HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" MinWidth="235" VerticalAlignment="Stretch"/>
+            <TextBlock Text="*" Grid.Column="1" Margin="4,0" VerticalAlignment="Center"  
+                   Foreground="Red"/>
+        </Grid>
         <Grid Margin="0,4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -58,8 +64,11 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 
+        <Grid>
+            <TextBlock Text="* Field required" Foreground="Red" VerticalAlignment="Center"/>
+            <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 
                 Click="NextButton_Click" />
+        </Grid>
     </StackPanel>
-    
+
 </base:CustomWindow>

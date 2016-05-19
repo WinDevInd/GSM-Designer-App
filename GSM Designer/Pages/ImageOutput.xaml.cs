@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace GSM_Designer.Pages
 {
-    /// <summary>
-    /// Interaction logic for ImageLayput.xaml
-    /// </summary>
     public partial class ImageOutput : CustomWindow
     {
         public bool IsClosed { get; set; } = true;
@@ -31,6 +28,11 @@ namespace GSM_Designer.Pages
             filecroppingVM = FileCroppingVM.Instance;
             this.Title = filecroppingVM.PatternName;
             this.KeyDown += ImageOutput_KeyDown;
+            var width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            var height = System.Windows.SystemParameters.PrimaryScreenHeight;
+
+            this.Height = Math.Min(height - 200, 800);
+            this.Width = Height * 0.6;
         }
 
 

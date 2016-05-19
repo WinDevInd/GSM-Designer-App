@@ -41,7 +41,7 @@ namespace GSM_Designer.AppNavigationService
                 case PageType.Splash:
                     return typeof(Splash);
                 case PageType.PatternName:
-                    return typeof(PatternNameWindow);
+                    return typeof(PatternInfoWindow);
                 case PageType.SelectFile:
                     return typeof(SelectFileWindow);
                 case PageType.ImageCropping:

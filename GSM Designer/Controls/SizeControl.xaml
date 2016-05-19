@@ -18,15 +18,18 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Label Content="Widht :" Grid.Row="0"/>
         <TextBox x:Name="WidthBox" PreviewTextInput="TextBox_TextChanged" TextChanged="TextBox_TextChanged_Route" Text="{Binding CanvasWidth,ElementName=SizeWidget}" Grid.Column="1" Grid.Row="0" Tag="Width"/>
-        <Label Content="Inches"  Grid.Row="0" Grid.Column="4"/>
+        <Label Content="Inches"  Grid.Row="0" Grid.Column="2"/>
+        <TextBlock Text="*" Grid.Row="0" VerticalAlignment="Center"  Grid.Column="3" Margin="8,0" Foreground="Red"/>
 
         <Label Content="Height :" Grid.Row="2"/>
         <TextBox x:Name="HeightBox" PreviewTextInput="TextBox_TextChanged" TextChanged="TextBox_TextChanged_Route" Text="{Binding CanvasHeight,ElementName=SizeWidget}" Foreground="#212121" Grid.Column="1" Grid.Row="2" Tag="Height"/>
         <Label Content="Inches" Grid.Row="2" Grid.Column="2"/>
+        <TextBlock Text="*" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center"  Margin="8,0" Foreground="Red"/>
 
     </Grid>
 </UserControl>

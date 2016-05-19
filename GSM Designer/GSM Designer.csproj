@@ -72,8 +72,8 @@
     <Compile Include="Pages\ImageOutput.xaml.cs">
       <DependentUpon>ImageOutput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PatternName.xaml.cs">
-      <DependentUpon>PatternName.xaml</DependentUpon>
+    <Compile Include="Pages\PatternInfo.xaml.cs">
+      <DependentUpon>PatternInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
@@ -109,7 +109,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\PatternName.xaml">
+    <Page Include="Pages\PatternInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

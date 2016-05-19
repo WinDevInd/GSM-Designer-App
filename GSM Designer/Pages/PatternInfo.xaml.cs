@@ -10,12 +10,12 @@ namespace GSM_Designer.Pages
     /// <summary>
     /// Interaction logic for PatterName.xaml
     /// </summary>
-    public partial class PatternNameWindow : CustomWindow
+    public partial class PatternInfoWindow : CustomWindow
     {
         private FileCroppingVM fileCroppingVM;
         private bool isDialog = false;
 
-        public PatternNameWindow()
+        public PatternInfoWindow()
         {
             InitializeComponent();
         }
