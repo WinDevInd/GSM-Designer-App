@@ -33,7 +33,6 @@ namespace GSM_Designer.Pages
 
             this.Height = Math.Min(height - 200, 800);
             this.Width = Height * 0.6;
-            ShowInTaskbar = false;
         }
 
 
@@ -63,11 +62,11 @@ namespace GSM_Designer.Pages
             OutputImageView.Visibility = Visibility.Collapsed;
             this.Activate();
             SaveButton.IsEnabled = false;
-            App.TaskQueue.ExecuteTaskAsync(() =>
+            await App.TaskQueue.ExecuteTaskAsync(() =>
             {
                 FileCroppingVM.Instance.CombinePattern();
             }, new TPL.TaskParams(TPL.Priority.High));
-            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
+            using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + ImageHelper.TIFFIMAGEEXTENSION))
             {
                 var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
                 var decodedImage = decoder.Frames[0];
@@ -77,10 +76,7 @@ namespace GSM_Designer.Pages
             SaveButton.IsEnabled = true;
             AlternateText.Visibility = Visibility.Collapsed;
             OutputImageView.Visibility = Visibility.Visible;
-            if (IsClosed)
-            {
-                ShowDialog();
-            }
+            this.Activate();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -91,15 +87,16 @@ namespace GSM_Designer.Pages
         private void SaveFile()
         {
             Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-            saveFileDialog.FileName = "output" + filecroppingVM.SelectedFormat.Extension;
-            saveFileDialog.Filter = ImageHelper.ImageFileFilter;
+            saveFileDialog.FileName = "output.tif";
+            saveFileDialog.Filter = ImageHelper.TIFFileFilter + "|" + ImageHelper.JPEGFileFileter;
             if (saveFileDialog.ShowDialog() == true)
             {
                 string fileName = saveFileDialog.FileName;
-                var bitmapEncoder = ImageHelper.GetEncoder(filecroppingVM.SelectedFormat.Format);
+                var extension = filecroppingVM.ImageFormatList[saveFileDialog.FilterIndex - 1].Extension;
+                var bitmapEncoder = ImageHelper.GetEncoder();
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(this.OutputImageView.Source as BitmapSource));
-                var saveFileName = fileName.EndsWith(filecroppingVM.SelectedFormat.Extension) ? fileName :
-                    fileName + filecroppingVM.SelectedFormat.Extension;
+                var saveFileName = fileName.EndsWith(extension) ? fileName :
+                    fileName + extension;
                 using (Stream stream = File.Create(saveFileName))
                 {
                     bitmapEncoder.Save(stream);

@@ -61,8 +61,8 @@ namespace GSM_Designer.ViewModel
             this.Height = DefaultHeight;
             this.PatternName = defaultPatternName;
             var imageFormatList = new List<ImageFormat>();
-            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.JPEGIMAGEEXTENSION, Format = ImageHelper.JPEGIMAGEFORMAT });
             imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.TIFFIMAGEEXTENSION, Format = ImageHelper.TIFFIAMGEFORMAT });
+            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.JPEGIMAGEEXTENSION, Format = ImageHelper.JPEGIMAGEFORMAT });
             ImageFormatList = imageFormatList;
             SelectedFormat = ImageFormatList[0];
         }
@@ -217,7 +217,7 @@ namespace GSM_Designer.ViewModel
         public async Task ApplySize(bool reset = false)
         {
             //// if no change in new and old size do not process
-            if (currentWidth == Width && currentHeight == Height && currentFormat == SelectedFormat.Format)
+            if (currentWidth == Width && currentHeight == Height)
                 return;
 
             currentHeight = Height;
@@ -259,8 +259,8 @@ namespace GSM_Designer.ViewModel
             {
                 var image = await App.TaskQueue.ExecuteTaskAsync(() =>
                 {
-                    var srcFile = PathPrefix + index + SelectedFormat.Extension;
-                    var croppedFile = PathPrefix + "collage" + index + SelectedFormat.Extension;
+                    var srcFile = PathPrefix + index;
+                    var croppedFile = PathPrefix + "collage" + index;
                     var croppedImage = CropImage(srcFile, croppedFile, x, y);
                     return croppedImage;
                 }, new TPL.TaskParams(TPL.Priority.Medium));
@@ -300,7 +300,7 @@ namespace GSM_Designer.ViewModel
                 {
                     var imageSource = new BitmapImage();
                     imageSource.BeginInit();
-                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + "collage" + i + SelectedFormat.Extension, UriKind.RelativeOrAbsolute);
+                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + "collage" + i, UriKind.RelativeOrAbsolute);
                     imageSource.EndInit();
                     xIncrement = imageSource.Width;
                     yIncrement = imageSource.Height;
@@ -350,9 +350,9 @@ namespace GSM_Designer.ViewModel
             RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)canvasWidth, (int)canvasHeight, DPIX, DPIY, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(drawingVisual);
             drawingVisual = null;
-            var bitmapEncoder = ImageHelper.GetEncoder(SelectedFormat.Format);
+            var bitmapEncoder = ImageHelper.GetEncoder(ImageHelper.TIFFIMAGEEXTENSION);
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + SelectedFormat.Extension))
+            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + ImageHelper.TIFFIMAGEEXTENSION))
             {
                 bitmapEncoder.Save(stream);
                 bitmapEncoder = null;
@@ -391,18 +391,18 @@ namespace GSM_Designer.ViewModel
                 DPIX = bitmapImage.DpiX;
                 DPIY = bitmapImage.DpiY;
             }
-            string extension = "";
-            switch (SelectedFormat.Format)
-            {
-                case ImageHelper.TIFFIAMGEFORMAT:
-                    extension = ImageHelper.TIFFIMAGEEXTENSION;
-                    break;
-                default:
-                    extension = ImageHelper.JPEGIMAGEEXTENSION;
-                    break;
-            }
-            var fileName = isPrimary ? PathPrefix + "collage" + index + extension : PathPrefix + index + extension;
-            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName, SelectedFormat.Format);
+            string extension = ImageHelper.JPEGIMAGEEXTENSION;
+            //switch (SelectedFormat.Format)
+            //{
+            //    case ImageHelper.TIFFIAMGEFORMAT:
+            //        extension = ImageHelper.TIFFIMAGEEXTENSION;
+            //        break;
+            //    default:
+            //        extension = ImageHelper.JPEGIMAGEEXTENSION;
+            //        break;
+            //}
+            var fileName = isPrimary ? PathPrefix + "collage" + index : PathPrefix + index;
+            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName, extension);
             bitmapImage = null;
             resizedImage = null;
             BitmapDecoder decoder = null;
@@ -432,7 +432,7 @@ namespace GSM_Designer.ViewModel
                 var imageToSave = ImageHelper.ProcessCroping(imageSource, new System.Windows.Size(croppedWidth, croppedHeight),
                     new System.Windows.Point(x, y));
 
-                var bitmapEncoder = ImageHelper.GetEncoder(SelectedFormat.Format);
+                var bitmapEncoder = ImageHelper.GetEncoder();
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(imageToSave));
                 var finalImage = new BitmapImage();
                 using (Stream stream = File.Create(destinationFileName))

@@ -168,7 +168,10 @@ namespace GSM_Designer.Pages
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             outputWindow = new ImageOutput();
+            UpdateUI(true);
             outputWindow.UpdateOutputLayout();
+            UpdateUI(false);
+            outputWindow.ShowDialog();
         }
 
         public void UpdateUI(bool isProcessing)
