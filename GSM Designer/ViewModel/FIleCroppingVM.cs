@@ -311,32 +311,32 @@ namespace GSM_Designer.ViewModel
                     switch (i)
                     {
                         case 0:
-                            FormattedText fA = new FormattedText(PatternName + " - A", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
+                            FormattedText fA = new FormattedText(PatternName + "/A", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPointText -= fA.Width;
                             drawingContext.DrawText(fA, new Point(xPointText, yPointText));
                             nextYLocation += imageSource.Height + marginVertical;
                             break;
                         case 1:
-                            FormattedText fB = new FormattedText(PatternName + " - B", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
+                            FormattedText fB = new FormattedText(PatternName + "/B", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPointText -= fB.Width;
                             drawingContext.DrawText(fB, new Point(xPointText, yPointText));
                             nextXLocation += imageSource.Width + (marginHorizontal);
                             break;
                         case 2:
-                            FormattedText fc = new FormattedText(PatternName + " - C", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
+                            FormattedText fc = new FormattedText(PatternName + "/C", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPointText -= fc.Width;
                             drawingContext.DrawText(fc, new Point(xPointText, yPointText));
                             nextXLocation -= imageSource.Width + (marginHorizontal); //// reset so next frame goes below 2nd image
                             nextYLocation += imageSource.Height + marginVertical;
                             break;
                         case 3:
-                            FormattedText fD = new FormattedText(PatternName + " - D", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
+                            FormattedText fD = new FormattedText(PatternName + "/D", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPointText -= fD.Width;
                             drawingContext.DrawText(fD, new Point(xPointText, yPointText));
                             nextXLocation += imageSource.Width + (marginHorizontal);
                             break;
                         case 4:
-                            FormattedText fE = new FormattedText(PatternName + " - E", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
+                            FormattedText fE = new FormattedText(PatternName + "/E", culture, FlowDirection.LeftToRight, patternTypeFace, fontSize, Brushes.Black);
                             xPointText -= fE.Width;
                             drawingContext.DrawText(fE, new Point(xPointText, yPointText));
                             break;
@@ -350,7 +350,6 @@ namespace GSM_Designer.ViewModel
             RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)canvasWidth, (int)canvasHeight, DPIX, DPIY, PixelFormats.Pbgra32);
             renderTargetBitmap.Render(drawingVisual);
             drawingVisual = null;
-
             var bitmapEncoder = ImageHelper.GetEncoder(SelectedFormat.Format);
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + SelectedFormat.Extension))

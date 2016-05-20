@@ -21,7 +21,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Widht :" Grid.Row="0"/>
+        <Label Content="Width :" Grid.Row="0"/>
         <TextBox x:Name="WidthBox" PreviewTextInput="TextBox_TextChanged" TextChanged="TextBox_TextChanged_Route" Text="{Binding CanvasWidth,ElementName=SizeWidget}" Grid.Column="1" Grid.Row="0" Tag="Width"/>
         <Label Content="Inches"  Grid.Row="0" Grid.Column="2"/>
         <TextBlock Text="*" Grid.Row="0" VerticalAlignment="Center"  Grid.Column="3" Margin="8,0" Foreground="Red"/>
