@@ -158,14 +158,8 @@ namespace GSM_Designer.Pages
 
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateUI(true);
-            if (outputWindow.IsClosed)
-            {
-                outputWindow = new ImageOutput();
-                outputWindow.Show();
-            }
+            outputWindow = new ImageOutput();
             outputWindow.UpdateOutputLayout();
-            UpdateUI(false);
         }
 
         public void UpdateUI(bool isProcessing)

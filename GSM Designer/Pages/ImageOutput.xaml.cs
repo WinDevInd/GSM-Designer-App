@@ -33,6 +33,7 @@ namespace GSM_Designer.Pages
 
             this.Height = Math.Min(height - 200, 800);
             this.Width = Height * 0.6;
+            ShowInTaskbar = false;
         }
 
 
@@ -62,7 +63,10 @@ namespace GSM_Designer.Pages
             OutputImageView.Visibility = Visibility.Collapsed;
             this.Activate();
             SaveButton.IsEnabled = false;
-            await FileCroppingVM.Instance.CombinePattern();
+            App.TaskQueue.ExecuteTaskAsync(() =>
+            {
+                FileCroppingVM.Instance.CombinePattern();
+            }, new TPL.TaskParams(TPL.Priority.High));
             using (FileStream stream = File.OpenRead(FileCroppingVM.PathPrefix + "output" + filecroppingVM.SelectedFormat.Extension))
             {
                 var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
@@ -73,7 +77,10 @@ namespace GSM_Designer.Pages
             SaveButton.IsEnabled = true;
             AlternateText.Visibility = Visibility.Collapsed;
             OutputImageView.Visibility = Visibility.Visible;
-
+            if (IsClosed)
+            {
+                ShowDialog();
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
