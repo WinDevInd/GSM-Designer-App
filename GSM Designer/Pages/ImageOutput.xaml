@@ -1,0 +1,31 @@
+﻿<base:CustomWindow x:Class="GSM_Designer.Pages.ImageOutput"
+                   xmlns:base="clr-namespace:GSM_Designer.Pages"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:local="clr-namespace:GSM_Designer.Pages"
+                   mc:Ignorable="d" 
+                   MaxHeight="800" Width="480"
+                   WindowStyle="ThreeDBorderWindow" 
+                   WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid HorizontalAlignment="Stretch" Background="#f1f1f1" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+       
+        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
+            <Image x:Name="OutputImageView" Stretch="None"/>
+        </Viewbox>
+        <Button x:Name="SaveButton" Content="Save Image" Grid.Row="1" HorizontalAlignment="Center" Click="SaveButton_Click"/>
+        <Rectangle x:Name="OpacityRect" Fill="#B2FFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Text="Please wait! Final desing is under Processing..."/>
+        <ProgressBar Height="10" Width="200" Maximum="5" IsIndeterminate="True" Foreground="#FF3279D4" x:Name="ProgressBar" Grid.RowSpan="2"
+                     VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+    </Grid>
+
+</base:CustomWindow>

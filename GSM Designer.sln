@@ -1,0 +1,118 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Designer", "GSM Designer\Designer.csproj", "{B600B5CE-19ED-466A-8656-61EBD752E34B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPL", "Libs\TPL.csproj", "{78C02642-4E0F-4321-81CD-4CCAFD6168DE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GSM Designer Setup", "GSM Designer Setup\GSM Designer Setup.vdproj", "{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUtil", "ImageUtil\ImageUtil.csproj", "{34B37948-6C42-4E23-8A08-213987A33FB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Debug-Phone|Any CPU = Debug-Phone|Any CPU
+		Debug-Phone|ARM = Debug-Phone|ARM
+		Debug-Phone|x64 = Debug-Phone|x64
+		Debug-Phone|x86 = Debug-Phone|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|x64.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug|x86.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|Any CPU.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|Any CPU.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|ARM.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|ARM.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|x64.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|x64.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|x86.ActiveCfg = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Debug-Phone|x86.Build.0 = Debug|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|ARM.Build.0 = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|x64.ActiveCfg = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|x64.Build.0 = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|x86.ActiveCfg = Release|Any CPU
+		{B600B5CE-19ED-466A-8656-61EBD752E34B}.Release|x86.Build.0 = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|ARM.Build.0 = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|x64.Build.0 = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug|x86.Build.0 = Debug|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|Any CPU.ActiveCfg = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|Any CPU.Build.0 = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|ARM.ActiveCfg = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|ARM.Build.0 = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|x64.ActiveCfg = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|x64.Build.0 = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|x86.ActiveCfg = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Debug-Phone|x86.Build.0 = Debug-Phone|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|ARM.Build.0 = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|x64.Build.0 = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{78C02642-4E0F-4321-81CD-4CCAFD6168DE}.Release|x86.Build.0 = Release|Any CPU
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug|Any CPU.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug|ARM.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug|x64.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug|x86.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug-Phone|Any CPU.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug-Phone|ARM.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug-Phone|x64.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Debug-Phone|x86.ActiveCfg = Debug
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|Any CPU.ActiveCfg = Release
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|ARM.ActiveCfg = Release
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|x64.ActiveCfg = Release
+		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|x86.ActiveCfg = Release
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x64.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x86.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|Any CPU.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|ARM.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|ARM.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x64.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x64.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x86.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x86.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|ARM.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x64.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x64.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x86.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
