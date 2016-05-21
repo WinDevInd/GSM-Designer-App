@@ -18,6 +18,7 @@ using GSM_Designer.Utils;
 using GSM_Designer.Model;
 using GSM_Designer.Pages;
 using GSM_Designer.AppNavigationService;
+using ImageUtil;
 
 namespace GSM_Designer
 {
@@ -26,7 +27,6 @@ namespace GSM_Designer
     /// </summary>
     public partial class SelectFileWindow : CustomWindow
     {
-        private double defaultWidth = 16.5 * 96;
         private Point _StartPoint;
         private DragAdorner _adorner;
         private AdornerLayer _layer;

@@ -25,6 +25,9 @@ namespace GSM_Designer.Pages
         private FileCroppingVM fileCroppingVM;
         private ImageOutput outputWindow;
         private bool canMoveCropBox = false;
+        private Point origin;
+        private double xOrigin = 0;
+        private double yOrigin = 0;
         public ImageCrop()
         {
             fileCroppingVM = FileCroppingVM.Instance;
@@ -117,15 +120,16 @@ namespace GSM_Designer.Pages
 
         private void path_MouseMove(object sender, MouseEventArgs e)
         {
-            if (canMoveCropBox)
+            if (canMoveCropBox && e.LeftButton == MouseButtonState.Pressed)
             {
                 var pos = e.GetPosition(path);
-                var locX = pos.X - InteractionArea.Rect.Width / 2;
-                var locY = pos.Y - InteractionArea.Rect.Height / 2;
-                var boundryX = InteractionArea.Rect.Width + pos.X;
-                var boundryY = InteractionArea.Rect.Height + pos.Y;
-                var x = pos.X;
-                var y = pos.Y;
+
+                var x = pos.X - origin.X + xOrigin;
+                var y = pos.Y - origin.Y + yOrigin;
+
+                var boundryX = InteractionArea.Rect.Width + x;
+                var boundryY = InteractionArea.Rect.Height + y;
+
                 if (boundryX > CompletArea.Rect.Width)
                 {
                     x = CompletArea.Rect.Width - InteractionArea.Rect.Width;
@@ -149,6 +153,9 @@ namespace GSM_Designer.Pages
         private void path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             canMoveCropBox = true;
+            origin = e.GetPosition(path);
+            xOrigin = SelectionArea.Rect.X;
+            yOrigin = SelectionArea.Rect.Y;
         }
 
         private void CropButton_Click(object sender, RoutedEventArgs e)
@@ -159,7 +166,10 @@ namespace GSM_Designer.Pages
         private async void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             outputWindow = new ImageOutput();
+            UpdateUI(true);
             outputWindow.UpdateOutputLayout();
+            UpdateUI(false);
+            outputWindow.ShowDialog();
         }
 
         public void UpdateUI(bool isProcessing)

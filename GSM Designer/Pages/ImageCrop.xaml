@@ -34,11 +34,11 @@
         </Grid.ColumnDefinitions>
 
         <Viewbox  Grid.RowSpan="5" Grid.Column="0" Margin="0,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Grid>
+            <Grid PreviewMouseMove="path_MouseMove">
                 <Image x:Name="ImageContainer" Margin="0"/>
                 <Path Stroke="#212121" Fill="#000000" Opacity=".5" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      MouseMove="path_MouseMove">
+                      >
                     <Path.Data>
                         <CombinedGeometry GeometryCombineMode="Exclude">
                             <CombinedGeometry.Geometry1>
@@ -52,7 +52,7 @@
                 </Path>
                 <Path x:Name="path" Stroke="#00212121" Fill="#01000000" Opacity=".5"  
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      MouseMove="path_MouseMove" MouseLeftButtonDown="path_MouseLeftButtonDown" MouseLeftButtonUp="path_MouseLeftButtonUp">
+                      MouseLeftButtonDown="path_MouseLeftButtonDown" MouseLeftButtonUp="path_MouseLeftButtonUp">
                     <Path.Data>
                         <CombinedGeometry GeometryCombineMode="Exclude">
                             <CombinedGeometry.Geometry1>
