@@ -113,7 +113,7 @@ namespace GSM_Designer.Pages
                 bitmapImage.BeginInit();
                 bitmapImage.UriSource = new Uri(FileCroppingVM.PathPrefix + "output", UriKind.RelativeOrAbsolute);
                 bitmapImage.EndInit();
-                var bitmapEncoder = ImageHelper.GetEncoder(extension);
+                var bitmapEncoder = ImageHelper.GetEncoder(extension, 60);
                 bitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
                 var saveFileName = fileName.EndsWith(extension) ? fileName :
                     fileName + extension;

@@ -30,7 +30,7 @@ namespace GSM_Designer.Pages
 
         private async void Splash_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(4000);
+            await Task.Delay(3000);
             CustomNavigationService.GetNavigationService().Navigate(this, new NavigationParam() { PageType = PageType.SelectFile, WindowType = WindowsType.WindowPage });
         }
     }

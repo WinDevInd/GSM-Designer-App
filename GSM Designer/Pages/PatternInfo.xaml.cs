@@ -64,19 +64,20 @@ namespace GSM_Designer.Pages
         private void SizeControl_PreviewTextChanged(object sender, TextChangedEventArgs e)
         {
             var text = (sender as TextBox).Text;
-            NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(text) && (text != "0" || text != "0.");
-            if (!string.IsNullOrWhiteSpace(text.Trim()))
+            var data = TextHelper.TextToPositiveDouble(text);
+            NextButton.IsEnabled = !string.IsNullOrWhiteSpace(PatternName.Text) && !string.IsNullOrWhiteSpace(data) && (data != "0" || data != "0.");
+            if (!string.IsNullOrWhiteSpace(data.Trim()))
             {
-                var data = TextHelper.TextToPositiveDouble(text);
-                if (!string.IsNullOrWhiteSpace(text))
+                
+                if (!string.IsNullOrWhiteSpace(data))
                 {
                     switch (e.Source.ToString())
                     {
                         case "Width":
-                            fileCroppingVM.Width = double.Parse(text);
+                            fileCroppingVM.Width = double.Parse(data);
                             break;
                         case "Height":
-                            fileCroppingVM.Height = double.Parse(text);
+                            fileCroppingVM.Height = double.Parse(data);
                             break;
                     }
                 }

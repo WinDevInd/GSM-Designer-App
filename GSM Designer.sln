@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSM Designer", "GSM Designer\GSM Designer.csproj", "{B600B5CE-19ED-466A-8656-61EBD752E34B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Designer", "GSM Designer\Designer.csproj", "{B600B5CE-19ED-466A-8656-61EBD752E34B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPL", "Libs\TPL.csproj", "{78C02642-4E0F-4321-81CD-4CCAFD6168DE}"
 EndProject

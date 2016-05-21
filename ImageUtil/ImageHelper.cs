@@ -111,14 +111,14 @@ namespace ImageUtil
             return renderTargetBitmap;
         }
 
-        public static BitmapEncoder GetEncoder(string formatType = JPEGIMAGEEXTENSION)
+        public static BitmapEncoder GetEncoder(string formatType = JPEGIMAGEEXTENSION,int qualityLevel = 100)
         {
             switch (formatType)
             {
                 case JPEGIMAGEEXTENSION:
-                    return new JpegBitmapEncoder();
+                    return new JpegBitmapEncoder() { QualityLevel = qualityLevel };
                 default:
-                    return new TiffBitmapEncoder();
+                    return new TiffBitmapEncoder() { Compression = TiffCompressOption.Default };
             }
         }
     }
