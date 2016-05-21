@@ -57,6 +57,11 @@ namespace TPL
         }
         public bool shouldRunOnUIThread { get; set; }
 
+        /// <summary>
+        /// Will return default value instead of throwing TaskCancelledException
+        /// </summary>
+        public bool suppressCancellationExceptions { get; set; }
+
         public bool forceCancelResponseIfExecuting { get; set; }
 
         internal Priority taskPriority { get; set; }
@@ -69,6 +74,7 @@ namespace TPL
             taskPriority = TaskPriority;
         }
         internal bool shouldRunOnUIThread { get; set; }
+        internal bool suppressCancellationExceptions { get; set; }
         internal event EventHandler<TaskCompletionEvent<T>> TaskCompleted;
         internal event EventHandler TaskFailed;
         internal Priority taskPriority { get; set; }
@@ -76,7 +82,6 @@ namespace TPL
         internal TaskCompletionSource<T> TCS { get; set; }
         internal bool TaskCancelled { get; set; }
         public bool forceCancelResponseIfExecuting { get; set; }
-
 
         void ICancelMethod.CancelTask()
         {
@@ -90,7 +95,10 @@ namespace TPL
             {
                 if (TaskCancelled)
                 {
-                    TCS.SetException(new TaskCanceledException());
+                    if (suppressCancellationExceptions)
+                        TCS.SetResult(res);
+                    else
+                        TCS.SetException(new TaskCanceledException());
                     if (TaskFailed != null)
                         TaskFailed(this, null);
                     return;
@@ -112,7 +120,11 @@ namespace TPL
 
             if (TaskCancelled && forceCancelResponseIfExecuting)
             {
-                TCS.SetException(new TaskCanceledException());
+                if (suppressCancellationExceptions)
+                    TCS.SetResult(res);
+                else
+                    TCS.SetException(new TaskCanceledException());
+
                 if (TaskFailed != null)
                     TaskFailed(this, null);
                 return;

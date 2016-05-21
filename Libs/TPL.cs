@@ -92,25 +92,33 @@ namespace TPL
             TaskParams<T> executionParams = new TaskParams<T>(executionQuery.taskPriority)
             {
                 shouldRunOnUIThread = executionQuery.shouldRunOnUIThread,
-                forceCancelResponseIfExecuting = executionQuery.forceCancelResponseIfExecuting
+                forceCancelResponseIfExecuting = executionQuery.forceCancelResponseIfExecuting,
+                suppressCancellationExceptions = executionQuery.suppressCancellationExceptions
             };
             executionQuery.AddCancelOperation(executionParams);
             executionParams.TaskParamsInitialize(TaskReference, tcs);
             executionParams.TaskCompleted += (o, e) =>
             {
+
                 tcs.SetResult(e.OperationResult);
                 lock (obj)
                 {
-                    currentExecCounter--;
-                    ProcessLoop();
+                    if (executionParams.taskPriority != Priority.Immediate)
+                    {
+                        currentExecCounter--;
+                        ProcessLoop();
+                    }
                 }
             };
             executionParams.TaskFailed += (o, e) =>
             {
                 lock (obj)
                 {
-                    currentExecCounter--;
-                    ProcessLoop();
+                    if (executionParams.taskPriority != Priority.Immediate)
+                    {
+                        currentExecCounter--;
+                        ProcessLoop();
+                    }
                 }
             };
 
@@ -121,9 +129,11 @@ namespace TPL
                     case Priority.High:
                         HighPriorityTasks.Enqueue(executionParams.ProcessExecutionQueryAsync);
                         break;
+
                     case Priority.Immediate:
                         executionParams.ProcessExecutionQueryAsync();
-                        break;
+                        return tcs.Task; //RETURNED BEFORE
+
                     case Priority.Low:
                         LowPriorityTasks.Enqueue(executionParams.ProcessExecutionQueryAsync);
                         break;

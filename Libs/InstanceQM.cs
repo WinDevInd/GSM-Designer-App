@@ -20,6 +20,15 @@ namespace TPL
                 ClientStack.Enqueue(Activator.CreateInstance<T>());
         }
 
+        public int GetQueueSize()
+        {
+            lock(lockVal)
+            {
+                var count = requestQueue.Count;
+                return count;
+            }
+        }
+
         public void ReleaseInstance(T client)
         {
             lock (lockVal)
