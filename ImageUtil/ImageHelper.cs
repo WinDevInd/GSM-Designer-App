@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace GSM_Designer.Utils
+namespace ImageUtil
 {
     public class ImageHelper
     {
@@ -18,7 +18,7 @@ namespace GSM_Designer.Utils
         public const string JPEGIMAGEEXTENSION = ".jpg";
         public const string TIFFIAMGEFORMAT = "TIFF";
         public const string TIFFIMAGEEXTENSION = ".tif";
-        public const string JPEGFileFileter = "Image File |*" + JPEGIMAGEEXTENSION;
+        public const string JPEGFileFileter = "JPG Image |*" + JPEGIMAGEEXTENSION;
         public const string TIFFileFilter = "TIF Image|*" + TIFFIMAGEEXTENSION;
         public const string ImageFileFilter = "Image Files |*" + JPEGIMAGEEXTENSION + ";*" + TIFFIMAGEEXTENSION;
         public const string ImageFileFilterExtended = ImageFileFilter + ";.png;*.jpeg";
@@ -50,7 +50,7 @@ namespace GSM_Designer.Utils
             return null;
         }
 
-        public static async Task<bool> SaveResizedBitmapImage(BitmapImage source, Size size, string desitnationPath = "file", string extension = TIFFIMAGEEXTENSION)
+        public static async Task<bool> SaveResizedBitmapImage(BitmapImage source, Size size, string desitnationPath = "file", string extension = JPEGIMAGEEXTENSION)
         {
             bool isTaskSuccess = false;
             try

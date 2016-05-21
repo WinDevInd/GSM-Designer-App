@@ -13,7 +13,6 @@ namespace GSM_Designer.Pages
 {
     public class CustomWindow : Window, iCustomNavigationService
     {
-        private object navigationPayLaod = null;
 
         public bool IsDialog
         {

@@ -1,6 +1,7 @@
 ﻿using GSM_Designer.Model;
 using GSM_Designer.Pages;
 using GSM_Designer.Utils;
+using ImageUtil;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,17 +31,12 @@ namespace GSM_Designer.ViewModel
         public object DecodedImage { get; set; }
     }
 
-    public class ImageFormat
-    {
-        public string Format { get; set; }
-        public string Extension { get; set; }
-    }
-
     public class FileCroppingVM : BaseViewModel
     {
         private static double DefaultWidth = 18.5;
         private static double DefaultHeight = 16.5;
         private static string defaultPatternName = "GSM DESIGN 1";
+        private const string fileNamePrefix = "collage";
         private double currentWidth = 0;
         private double currentHeight = 0;
         private string currentFormat = "";
@@ -51,7 +47,6 @@ namespace GSM_Designer.ViewModel
         private FileCroppingVM()
         {
             Initialize();
-
         }
 
         private void Initialize()
@@ -60,13 +55,7 @@ namespace GSM_Designer.ViewModel
             this.Width = DefaultWidth;
             this.Height = DefaultHeight;
             this.PatternName = defaultPatternName;
-            var imageFormatList = new List<ImageFormat>();
-            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.TIFFIMAGEEXTENSION, Format = ImageHelper.TIFFIAMGEFORMAT });
-            imageFormatList.Add(new ImageFormat() { Extension = ImageHelper.JPEGIMAGEEXTENSION, Format = ImageHelper.JPEGIMAGEFORMAT });
-            ImageFormatList = imageFormatList;
-            SelectedFormat = ImageFormatList[0];
         }
-
 
         public static FileCroppingVM Instance
         {
@@ -77,32 +66,6 @@ namespace GSM_Designer.ViewModel
                     _Instance = new FileCroppingVM();
                 }
                 return _Instance;
-            }
-        }
-
-        private List<ImageFormat> _ImageFormatList;
-        public List<ImageFormat> ImageFormatList
-        {
-            get
-            {
-                return _ImageFormatList;
-            }
-            set
-            {
-                SetFieldAndNotify(ref _ImageFormatList, value);
-            }
-        }
-
-        private ImageFormat _SelectedFormat;
-        public ImageFormat SelectedFormat
-        {
-            get
-            {
-                return _SelectedFormat;
-            }
-            set
-            {
-                SetFieldAndNotify(ref _SelectedFormat, value);
             }
         }
 
@@ -200,7 +163,7 @@ namespace GSM_Designer.ViewModel
             return CroppedHeight * DPIY;
         }
 
-        public async Task LoadFiles(ICollection<ImageFileInfo> items)
+        public void LoadFiles(ICollection<ImageFileInfo> items)
         {
             var i = 0;
             Images = new ObservableCollection<ExtendedImageFileInfo>();
@@ -222,7 +185,6 @@ namespace GSM_Designer.ViewModel
 
             currentHeight = Height;
             currentWidth = Width;
-            currentFormat = SelectedFormat.Extension;
             IsLoading = true;
             if (Images == null || !Images.Any())
                 return;
@@ -260,7 +222,7 @@ namespace GSM_Designer.ViewModel
                 var image = await App.TaskQueue.ExecuteTaskAsync(() =>
                 {
                     var srcFile = PathPrefix + index;
-                    var croppedFile = PathPrefix + "collage" + index;
+                    var croppedFile = PathPrefix + fileNamePrefix + index;
                     var croppedImage = CropImage(srcFile, croppedFile, x, y);
                     return croppedImage;
                 }, new TPL.TaskParams(TPL.Priority.Medium));
@@ -274,7 +236,7 @@ namespace GSM_Designer.ViewModel
             GC.Collect();
         }
 
-        public async Task CombinePattern()
+        public async Task CombinePattern(string outputFileName="output")
         {
             var marginHorizontal = ImageMargin;
             var marginVertical = ImageMargin * 2;
@@ -300,7 +262,7 @@ namespace GSM_Designer.ViewModel
                 {
                     var imageSource = new BitmapImage();
                     imageSource.BeginInit();
-                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + "collage" + i, UriKind.RelativeOrAbsolute);
+                    imageSource.UriSource = new Uri(FileCroppingVM.PathPrefix + fileNamePrefix + i, UriKind.RelativeOrAbsolute);
                     imageSource.EndInit();
                     xIncrement = imageSource.Width;
                     yIncrement = imageSource.Height;
@@ -352,7 +314,7 @@ namespace GSM_Designer.ViewModel
             drawingVisual = null;
             var bitmapEncoder = ImageHelper.GetEncoder(ImageHelper.TIFFIMAGEEXTENSION);
             bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + "output" + ImageHelper.TIFFIMAGEEXTENSION))
+            using (Stream stream = File.Create(FileCroppingVM.PathPrefix + outputFileName))
             {
                 bitmapEncoder.Save(stream);
                 bitmapEncoder = null;
@@ -391,18 +353,8 @@ namespace GSM_Designer.ViewModel
                 DPIX = bitmapImage.DpiX;
                 DPIY = bitmapImage.DpiY;
             }
-            string extension = ImageHelper.JPEGIMAGEEXTENSION;
-            //switch (SelectedFormat.Format)
-            //{
-            //    case ImageHelper.TIFFIAMGEFORMAT:
-            //        extension = ImageHelper.TIFFIMAGEEXTENSION;
-            //        break;
-            //    default:
-            //        extension = ImageHelper.JPEGIMAGEEXTENSION;
-            //        break;
-            //}
-            var fileName = isPrimary ? PathPrefix + "collage" + index : PathPrefix + index;
-            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName, extension);
+            var fileName = isPrimary ? PathPrefix + fileNamePrefix + index : PathPrefix + index;
+            var resizedImage = ImageHelper.SaveResizedBitmapImage(bitmapImage, new System.Windows.Size(width, height), fileName);
             bitmapImage = null;
             resizedImage = null;
             BitmapDecoder decoder = null;

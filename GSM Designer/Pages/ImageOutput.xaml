@@ -15,13 +15,17 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
-                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Text="Please wait! Final desing is under Processing..."/>
+       
         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
             <Image x:Name="OutputImageView" Stretch="None"/>
         </Viewbox>
         <Button x:Name="SaveButton" Content="Save Image" Grid.Row="1" HorizontalAlignment="Center" Click="SaveButton_Click"/>
+        <Rectangle x:Name="OpacityRect" Fill="#B2FFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="5" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="AlternateText" TextWrapping="WrapWithOverflow"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Text="Please wait! Final desing is under Processing..."/>
+        <ProgressBar Height="10" Width="200" Maximum="5" IsIndeterminate="True" Foreground="#FF3279D4" x:Name="ProgressBar" Grid.RowSpan="2"
+                     VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
     </Grid>
 
 </base:CustomWindow>

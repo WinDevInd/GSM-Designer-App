@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPL", "Libs\TPL.csproj", "{
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GSM Designer Setup", "GSM Designer Setup\GSM Designer Setup.vdproj", "{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUtil", "ImageUtil\ImageUtil.csproj", "{34B37948-6C42-4E23-8A08-213987A33FB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,30 @@ Global
 		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|ARM.ActiveCfg = Release
 		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|x64.ActiveCfg = Release
 		{C24A4C3D-A99B-4185-8B3C-49B9B5FF9CFF}.Release|x86.ActiveCfg = Release
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x64.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug|x86.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|Any CPU.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|ARM.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|ARM.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x64.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x64.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x86.ActiveCfg = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Debug-Phone|x86.Build.0 = Debug|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|ARM.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x64.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x64.Build.0 = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x86.ActiveCfg = Release|Any CPU
+		{34B37948-6C42-4E23-8A08-213987A33FB6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

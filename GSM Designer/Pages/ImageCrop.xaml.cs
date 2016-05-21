@@ -116,12 +116,11 @@ namespace GSM_Designer.Pages
         private void path_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             canMoveCropBox = false;
-            this.Cursor = Cursors.Arrow;
         }
 
         private void path_MouseMove(object sender, MouseEventArgs e)
         {
-            if (canMoveCropBox)
+            if (canMoveCropBox && e.LeftButton == MouseButtonState.Pressed)
             {
                 var pos = e.GetPosition(path);
 
@@ -154,7 +153,6 @@ namespace GSM_Designer.Pages
         private void path_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             canMoveCropBox = true;
-            this.Cursor = Cursors.SizeAll;
             origin = e.GetPosition(path);
             xOrigin = SelectionArea.Rect.X;
             yOrigin = SelectionArea.Rect.Y;

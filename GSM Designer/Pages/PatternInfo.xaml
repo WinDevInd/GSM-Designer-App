@@ -7,7 +7,7 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:GSM_Designer.Pages"
                    mc:Ignorable="d"
-                   Title="Pattern Info" Height="480" Width="300" 
+                   Title="Pattern Info" Height="400" Width="300" 
                    Background="#f1f1f1"
                    WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
@@ -57,13 +57,13 @@
 
             </Grid>
         </Grid>
-        <ComboBox x:Name="ImageList" Margin="4,0" HorizontalAlignment="Left" Width="150" ItemsSource="{Binding ImageFormatList}" SelectedItem="{Binding SelectedFormat,Mode=TwoWay}">
+        <!--<ComboBox x:Name="ImageList" Margin="4,0" HorizontalAlignment="Left" Width="150" ItemsSource="{Binding ImageFormatList}" SelectedItem="{Binding SelectedFormat,Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Format}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>
+        </ComboBox>-->
         <Grid>
             <TextBlock Text="* Field required" Foreground="Red" VerticalAlignment="Center"/>
             <Button x:Name="NextButton" Content="Apply" HorizontalAlignment="Right" IsEnabled="False" 

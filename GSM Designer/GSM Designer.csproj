@@ -79,7 +79,6 @@
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\DragAdorner.cs" />
-    <Compile Include="Utils\ImageHelper.cs" />
     <Compile Include="Utils\TextHelper.cs" />
     <Compile Include="Utils\UIHelper.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -153,6 +152,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageUtil\ImageUtil.csproj">
+      <Project>{34b37948-6c42-4e23-8a08-213987a33fb6}</Project>
+      <Name>ImageUtil</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libs\TPL.csproj">
       <Project>{78C02642-4E0F-4321-81CD-4CCAFD6168DE}</Project>
       <Name>TPL</Name>
