@@ -64,7 +64,7 @@
             </Grid>
         </Viewbox>
 
-        <TextBlock x:Name="InfoTextBlockLeft" Text="Primary Canvas will appear here" Grid.Row="2" TextWrapping="Wrap" 
+        <TextBlock x:Name="InfoTextBlockLeft" Text="Primary Canvas will appear here" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="Wrap" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="InfoTextBlockRight" Text="Cropped Pattern will appear here" Grid.Column="2" Grid.Row="2"  
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>

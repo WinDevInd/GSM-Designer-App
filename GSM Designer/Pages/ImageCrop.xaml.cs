@@ -80,6 +80,10 @@ namespace GSM_Designer.Pages
                     break;
                 case 1:
                     this.BCrop.Source = imageSource;
+                    if (imageSource != null)
+                    {
+                        InfoTextBlockRight.Visibility = Visibility.Collapsed;
+                    }
                     break;
                 case 2:
                     this.CCrop.Source = imageSource;
@@ -92,7 +96,6 @@ namespace GSM_Designer.Pages
                     if (imageSource != null)
                     {
                         ApplyButton.IsEnabled = true;
-                        InfoTextBlockRight.Visibility = Visibility.Collapsed;
                     }
                     break;
             }

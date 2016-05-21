@@ -87,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2431ACC74AD48C600F41DBF38F67C270"
+        "OwnerKey" = "8:_2C6139F4A7474D1AB6144669176B0487"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_244B3402C8D22C7F08556749523E43C8"
         "OwnerKey" = "8:_2C6139F4A7474D1AB6144669176B0487"
         "MsmSig" = "8:_UNDEFINED"
@@ -389,6 +395,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2C6139F4A7474D1AB6144669176B0487"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2431ACC74AD48C600F41DBF38F67C270"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1054,6 +1066,37 @@
                     }
                 }
             "SourcePath" = "8:System.Net.Primitives.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4FE74CF3F7664C268312AF6EFF6AC05E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2431ACC74AD48C600F41DBF38F67C270"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ImageUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2431ACC74AD48C600F41DBF38F67C270"
+                    {
+                    "Name" = "8:ImageUtil.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ImageUtil.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4FE74CF3F7664C268312AF6EFF6AC05E"
@@ -2500,21 +2543,21 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GSM Designer"
-        "ProductCode" = "8:{F0D1AD5E-D224-4DD1-B0D8-BCB70D693906}"
-        "PackageCode" = "8:{C8CF057E-D3D0-4919-B94D-A43B5A0629D9}"
+        "ProductCode" = "8:{EA4AEED2-D581-497B-B66E-DDDD39C2A100}"
+        "PackageCode" = "8:{B94DDA7A-C4FD-45A6-8EB5-0339850D620F}"
         "UpgradeCode" = "8:{6DD7D56B-716C-4D97-97AF-AA6B29C82FD2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.0.4"
-        "Manufacturer" = "8:ArcheSoft"
+        "ProductVersion" = "8:1.0.0"
+        "Manufacturer" = "8:Arche Soft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:GSM Designer Setup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:ArcheSoft"
+        "ARPCONTACT" = "8:Arche Soft"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -3036,7 +3079,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2C6139F4A7474D1AB6144669176B0487"
             {
-            "SourcePath" = "8:..\\GSM Designer\\obj\\Release\\GSM Designer.exe"
+            "SourcePath" = "8:..\\GSM Designer\\obj\\Release\\Designer.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4FE74CF3F7664C268312AF6EFF6AC05E"
