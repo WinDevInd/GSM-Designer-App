@@ -31,7 +31,6 @@ namespace GSM_Designer
                 RemoveOnAway = true
             };
             CustomNavigationService.GetNavigationService().Navigate(null, navParam);
-            //new Window1().Show();
         }
     }
 }

@@ -174,13 +174,13 @@ namespace GSM_Designer.ViewModel
                 i++;
             }
 
-            ApplySize();
+            ApplySize(false, true);
         }
 
-        public async Task ApplySize(bool reset = false)
+        public async Task ApplySize(bool reset = false, bool forcedApply = false)
         {
             //// if no change in new and old size do not process
-            if (currentWidth == Width && currentHeight == Height)
+            if (!forcedApply && currentWidth == Width && currentHeight == Height)
                 return;
 
             currentHeight = Height;
@@ -236,7 +236,7 @@ namespace GSM_Designer.ViewModel
             GC.Collect();
         }
 
-        public async Task CombinePattern(string outputFileName="output")
+        public async Task CombinePattern(string outputFileName = "output")
         {
             var marginHorizontal = ImageMargin;
             var marginVertical = ImageMargin * 2;

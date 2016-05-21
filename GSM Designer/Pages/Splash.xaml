@@ -30,7 +30,7 @@
         </TextBlock>
         <TextBlock Grid.Row="2" x:Name="VersionText" Text="Version 1.0.0" TextAlignment="Center" HorizontalAlignment="Center" 
                    FontSize="12" VerticalAlignment="Bottom" />
-        <Image Source="/GSM Designer;component/Resource/logo.png" Stretch="Uniform" Width="120" VerticalAlignment="Top"/>
+        <Image x:Name="Logo" Source="pack://application:,,,/Resource/logo.png" Stretch="Uniform" Width="120" VerticalAlignment="Top"/>
         <ProgressBar IsIndeterminate="True"  VerticalAlignment="Top" Grid.Row="4" Grid.RowSpan="3" Background="{x:Null}" BorderBrush="{x:Null}">
             <ProgressBar.Effect>
                 <BlurEffect Radius="1"/>

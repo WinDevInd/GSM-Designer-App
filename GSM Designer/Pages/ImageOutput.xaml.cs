@@ -96,6 +96,7 @@ namespace GSM_Designer.Pages
             }, new TPL.TaskParams(TPL.Priority.High));
             ProgressBar.Visibility = OpacityRect.Visibility = AlternateText.Visibility = Visibility.Collapsed;
             SaveButton.IsEnabled = true;
+            this.Activate();
         }
 
         private async Task SaveFile()
