@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 
-namespace Designer.Controls
+namespace ViewLibrary
 {
     public class VirtulizedWrapPanel : VirtualizingPanel, IScrollInfo
     {
@@ -78,9 +78,9 @@ namespace Designer.Controls
             set { SetValue(OrientationProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register("ItemHeight", typeof(double), typeof(VirtualizingWrapPanel), new FrameworkPropertyMetadata(double.PositiveInfinity));
-        public static readonly DependencyProperty ItemWidthProperty = DependencyProperty.Register("ItemWidth", typeof(double), typeof(VirtualizingWrapPanel), new FrameworkPropertyMetadata(double.PositiveInfinity));
-        public static readonly DependencyProperty OrientationProperty = StackPanel.OrientationProperty.AddOwner(typeof(VirtualizingWrapPanel), new FrameworkPropertyMetadata(Orientation.Horizontal));
+        public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register("ItemHeight", typeof(double), typeof(VirtulizedWrapPanel), new FrameworkPropertyMetadata(double.PositiveInfinity));
+        public static readonly DependencyProperty ItemWidthProperty = DependencyProperty.Register("ItemWidth", typeof(double), typeof(VirtulizedWrapPanel), new FrameworkPropertyMetadata(double.PositiveInfinity));
+        public static readonly DependencyProperty OrientationProperty = StackPanel.OrientationProperty.AddOwner(typeof(VirtulizedWrapPanel), new FrameworkPropertyMetadata(Orientation.Horizontal));
 
         #endregion
 
