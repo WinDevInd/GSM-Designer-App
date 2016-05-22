@@ -10,9 +10,13 @@ namespace ViewLibrary
 {
     public class CustomGridView : ListView
     {
+        static CustomGridView()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomGridView), new FrameworkPropertyMetadata(typeof(CustomGridView)));
+        }
+
         public CustomGridView()
         {
-            //this.DefaultStyleKey = typeof(GridView);
             this.SizeChanged += CustomGridView_SizeChanged;
         }
 

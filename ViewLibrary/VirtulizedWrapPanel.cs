@@ -13,7 +13,7 @@ using System.Collections.ObjectModel;
 
 namespace ViewLibrary
 {
-    public class VirtulizedWrapPanel : VirtualizingPanel, IScrollInfo
+    internal class VirtulizedWrapPanel : VirtualizingPanel, IScrollInfo
     {
         #region Fields
 

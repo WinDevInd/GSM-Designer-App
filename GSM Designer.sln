@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUtil", "ImageUtil\Imag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewLibrary", "ViewLibrary\ViewLibrary.csproj", "{E4E67B7A-AC1B-4F82-84D6-8620DF9B1D34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignShow", "DesignShow\DesignShow.csproj", "{EC423356-64CC-46CB-B001-FC48C9AF7AA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,30 @@ Global
 		{E4E67B7A-AC1B-4F82-84D6-8620DF9B1D34}.Release|x64.Build.0 = Release|Any CPU
 		{E4E67B7A-AC1B-4F82-84D6-8620DF9B1D34}.Release|x86.ActiveCfg = Release|Any CPU
 		{E4E67B7A-AC1B-4F82-84D6-8620DF9B1D34}.Release|x86.Build.0 = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|Any CPU.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|ARM.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|ARM.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|x64.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|x64.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|x86.ActiveCfg = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Debug-Phone|x86.Build.0 = Debug|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|ARM.Build.0 = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|x64.Build.0 = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC423356-64CC-46CB-B001-FC48C9AF7AA9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
